@@ -11,7 +11,7 @@ class Stage1 extends Phaser.Scene {
 
     preload() {
         // load images/tile sprites
-        // this.load.image('mario', './assets/mario.png');
+        this.load.image('mario', './assets/player.png');
         // this.load.image('background', './assets/scene0.png');
         // this.load.image('pipe', './assets/pipeHitbox.png');
         // this.load.audio('music', './assets/backgroundMusic.wav');
