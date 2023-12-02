@@ -1,4 +1,4 @@
-class Menu extends Phaser.Scene {
+class mainMenu extends Phaser.Scene {
     constructor() {
         super("menuScene")
     }
@@ -28,6 +28,7 @@ class Menu extends Phaser.Scene {
     update() {
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
             game.settings = {}
+            currentScene = 1
             this.sound.play('start')
             this.scene.start('massadora')
           }
