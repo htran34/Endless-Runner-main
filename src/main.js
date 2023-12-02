@@ -1,5 +1,6 @@
 // Hunter Tran
-
+// External sources used:
+// Menu Selection w/ Cursor in TypeScript: https://blog.ourcade.co/posts/2020/phaser-3-ui-menu-selection-cursor-selector/
 
 let config = {
     type: Phaser.AUTO,

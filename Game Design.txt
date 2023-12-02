@@ -18,6 +18,7 @@ Greed Island Game Design
 	- Use a card that they own
 - Free actions players can take (consume 0 turn)
 	- View all remaining available copies of cards in the game
+	- View your currently held cards
 - Available copies of each card in the game kept track of with multiple dicts (Keys are card names, 
   values are quantaties remaining.) for both the game world & each individual player 
 - Another dictionary to keep track of transformation limits of all cards in the game (cards
