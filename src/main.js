@@ -21,6 +21,13 @@ let game = new Phaser.Game(config)
 // reserve keyboard vars
 let keySpace, score
 let currentScene = 0
+// text configuration
+let textConfig = {
+  fontSize: '28px',
+  align: 'center',
+  strokeThickness: 3
+}
+// sound configuration
 let soundConfig = {
   volume: 2,
   loop: true

@@ -1,7 +1,4 @@
 class optionMenu extends Phaser.Scene {
-    buttons = []
-    selectedButtonIndex = 0
-  
     constructor() {
         super("selectScene")
     }
@@ -19,10 +16,30 @@ class optionMenu extends Phaser.Scene {
         this.load.image("cursor-hand", "assets/PNG/cursor_hand.png")
     }
   
+    toggleButtons(objects) {
+        if (objects[0].visible) {
+            for (let i=0; i<objects.length; i+=1) {
+                objects[i].setVisible(false)
+            }
+            this.buttonsActive = false
+        }
+        else {
+            for (let i=0; i<objects.length; i+=1) {
+                objects[i].setVisible(true)
+            }
+            this.buttonsActive = true
+        }
+    }
+
     create() {
+        this.buttonsActive = true
+        this.travelActive = false, this.questActive = false, this.checkActive = false
+        this.buttons = []
+        this.selectedButtonIndex = 0
+
         // Grab & display current scene background image
         let scenes = [NaN, 'background1']
-        let cities = [NaN, 'Massadora']
+        let cities = [NaN, 'MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
         this.add.image(320, 240, scenes[currentScene])
         
         const { width, height } = this.scale
@@ -30,90 +47,141 @@ class optionMenu extends Phaser.Scene {
         //================================================================
         /* BUTTON DEFINITIONS */
         // Travel button
-        const travelButton = this.add
+        this.travelButton = this.add
             .image(width * 0.5, height * 0.6, "glass-panel")
             .setDisplaySize(150, 50)
     
-        this.add.text(travelButton.x, travelButton.y, "Travel").setOrigin(0.5)
+        this.travelButtonText = this.add.text(this.travelButton.x, this.travelButton.y, "Travel").setOrigin(0.5)
     
         // Quest button
-        const questButton = this.add
+        this.questButton = this.add
             .image(
-              travelButton.x,
-              travelButton.y + travelButton.displayHeight + 10,
+              this.travelButton.x,
+              this.travelButton.y + this.travelButton.displayHeight + 10,
               "glass-panel"
             )
             .setDisplaySize(150, 50)
     
-        this.add.text(questButton.x, questButton.y, "Enter Quest").setOrigin(0.5)
+        this.questButtonText = this.add.text(this.questButton.x, this.questButton.y, "Enter Quest").setOrigin(0.5)
     
         // Check Cards button
-        const checkCardsButton = this.add
+        this.checkCardsButton = this.add
             .image(
-              questButton.x,
-              questButton.y + questButton.displayHeight + 10,
+              this.questButton.x,
+              this.questButton.y + this.questButton.displayHeight + 10,
               "glass-panel"
             )
             .setDisplaySize(150, 50)
     
-        this.add.text(checkCardsButton.x, checkCardsButton.y, "Check Cards").setOrigin(0.5)
+        this.checkCardsButtonText = this.add.text(this.checkCardsButton.x, this.checkCardsButton.y, "Check Cards").setOrigin(0.5)
     
-        this.buttons.push(travelButton)
-        this.buttons.push(questButton)
-        this.buttons.push(checkCardsButton)
+        this.buttons.push(this.travelButton)
+        this.buttons.push(this.questButton)
+        this.buttons.push(this.checkCardsButton)
         this.buttonSelector = this.add.image(0, 0, "cursor-hand")
         this.selectButton(0)
+
+        let objects = [
+          this.travelButton, 
+          this.travelButtonText,
+          this.questButton,
+          this.questButtonText,
+          this.checkCardsButton,
+          this.checkCardsButtonText,
+          this.buttonSelector
+        ]
     
-        travelButton.on("selected", () => {
-            console.log("play")
+        this.travelButton.on("selected", () => {
+            this.toggleButtons(objects)
+            this.travelActive = true
+            this.add.text(100, 350, "You are currently in the city of " +cities[currentScene])
+            this.add.text(100, 375, "Where would you like to travel? (Use arrow keys)")
+            // Grab adjacent cities
+            if (currentScene == 1) {
+                this.adjacentCities = [cities[2]]
+            }
+            else if (currentScene == (cities.length - 1)) {
+                this.adjacentCities = [cities[cities.length - 2]]
+            }
+            else {
+                this.adjacentCities = [cities[currentScene - 1], cities[currentScene + 1]]
+            }
+            if (this.adjacentCities.length == 1) {
+                this.add.text(100, 400, this.adjacentCities[0] + "<-  |  ->OTHER")
+            }
+            else {
+                this.add.text(100, 400, this.adjacentCities[0] + "<-  |  OTHER ^  |  ->" + this.adjacentCities[1])
+            }
         })
     
-        questButton.on("selected", () => {
+        this.questButton.on("selected", () => {
             console.log("settings")
         })
     
-        checkCardsButton.on("selected", () => {
+        this.checkCardsButton.on("selected", () => {
             console.log("credits")
         })
     }
   
     selectButton(index) {
-      const currentButton = this.buttons[this.selectedButtonIndex]
-      currentButton.setTint(0xffffff)
-      const button = this.buttons[index]
-      button.setTint(0x66ff7f)
-      this.buttonSelector.x = button.x + button.displayWidth * 0.5
-      this.buttonSelector.y = button.y + 10
-      this.selectedButtonIndex = index
+        const currentButton = this.buttons[this.selectedButtonIndex]
+        currentButton.setTint(0xffffff)
+        const button = this.buttons[index]
+        button.setTint(0x66ff7f)
+        this.buttonSelector.x = button.x + button.displayWidth * 0.5
+        this.buttonSelector.y = button.y + 10
+        this.selectedButtonIndex = index
     }
   
     selectNextButton(change = 1) {
-      let index = this.selectedButtonIndex + change
-      if (index >= this.buttons.length) {
-        index = 0
-      } else if (index < 0) {
-        index = this.buttons.length - 1
-      }
+        let index = this.selectedButtonIndex + change
+        if (index >= this.buttons.length) {
+            index = 0
+        } else if (index < 0) {
+            index = this.buttons.length - 1
+        }
   
-      this.selectButton(index)
+        this.selectButton(index)
     }
   
     confirmSelection() {
-      const button = this.buttons[this.selectedButtonIndex]
-      button.emit("selected")
+        const button = this.buttons[this.selectedButtonIndex]
+        button.emit("selected")
     }
   
     update() {
-      const upJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.up)
-      const downJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.down)
-      const spaceJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.space)
-  
-      if (upJustPressed) {
-        this.selectNextButton(-1)
-      } else if (downJustPressed) {
-        this.selectNextButton(1)
-      } else if (spaceJustPressed) {
-        this.confirmSelection()
-      }
+        if (this.buttonsActive) {
+            const upJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.up)
+            const downJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.down)
+            const spaceJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.space)
+        
+            if (upJustPressed) {
+                this.selectNextButton(-1)
+            } else if (downJustPressed) {
+                this.selectNextButton(1)
+            } else if (spaceJustPressed) {
+                this.confirmSelection()
+            }
+        }
+        if (this.travelActive) {
+            const upJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.up)
+            const leftJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.left)
+            const rightJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.right)
+
+            if (upJustPressed && (this.adjacentCities.length == 2)) {
+                console.log("Use a copy of Accompany to travel to any city?")
+            }
+            if (leftJustPressed) {
+                console.log("Going to " + this.adjacentCities[0])
+            }
+            else if (rightJustPressed) {
+                if (this.adjacentCities.length == 1) {
+                    console.log("Use a copy of Accompany to travel to any city?")
+                }
+                else {
+                    console.log("Going to " + this.adjacentCities[1])
+                }
+            }
+        }
     }
-  }
+}

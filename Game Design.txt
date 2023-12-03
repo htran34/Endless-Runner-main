@@ -4,7 +4,7 @@ Greed Island Game Design
 - 15-20 different cards, 10 copies per card, all cards have transformation limit of 3
 - 10 other NPC players, all players begin with 5 accompany cards
 - 10 cities total
-	- 1 special city: "Massadora" where card shop is located
+	- 1 special city: where card shop is located
 	- All other cities offer unique quests to obtain cards 
 - Each city will be a different scene with their own unique:
 	- background image

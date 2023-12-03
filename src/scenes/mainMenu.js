@@ -8,16 +8,9 @@ class mainMenu extends Phaser.Scene {
     }
 
     create() {
-        // menu text configuration
-        let menuConfig = {
-            fontSize: '28px',
-            align: 'center',
-            strokeThickness: 3
-        }
-
         // display various menu elements
         this.add.rectangle(200, 0, 1000, 1000, 0x63a0fd)   // sets menu background color              
-        this.add.text(150, 300, 'PRESS SPACE TO START', menuConfig)
+        this.add.text(150, 300, 'PRESS SPACE TO START', textConfig)
 
         // define keys
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
