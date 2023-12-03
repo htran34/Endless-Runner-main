@@ -23,7 +23,7 @@ class mainMenu extends Phaser.Scene {
             game.settings = {}
             currentScene = 1
             this.sound.play('start')
-            this.scene.start('massadora')
+            this.scene.start('MASSADORA')
           }
     }
 }

@@ -1,6 +1,6 @@
-class Scene1 extends Phaser.Scene {
+class Scene2 extends Phaser.Scene {
     constructor() {
-        super("MASSADORA")
+        super("CARD SHOP")
     }
 
     preload() {

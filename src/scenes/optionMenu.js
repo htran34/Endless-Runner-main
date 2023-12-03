@@ -148,6 +148,10 @@ class optionMenu extends Phaser.Scene {
         const button = this.buttons[this.selectedButtonIndex]
         button.emit("selected")
     }
+
+    consumeTurn() {
+
+    }
   
     update() {
         // Activates button functionality
@@ -181,6 +185,8 @@ class optionMenu extends Phaser.Scene {
             // LEFT arrow option
             if (leftJustPressed) {
                 this.adjacentCityText = this.add.text(100, 350, "Going to adjacent city "+this.adjacentCities[0])
+                currentScene = this.adjacentCities.indexOf(this.adjacentCities[0])
+                currentTurn += 1
                 this.scene.start(this.adjacentCities[0])
             }
 
@@ -192,8 +198,8 @@ class optionMenu extends Phaser.Scene {
                     this.accompanyOptionText = this.add.text(100, 375, "YES  <-  |  ->NO")
                     // Consume a copy of accompany if player has any remaining
                     if (leftJustPressed) {
-                        if (accompanies[player] >= 1) {
-                            accompanies[player] -= 1
+                        if (inventories[player]['Accompany'] >= 1) {
+                            inventories[player]['Accompany'] -= 1
                             this.useAccompanyText.setVisible(false)
                             this.accompanyOptionText.setVisible(false)
                             this.consumeAccompanyText = this.add.text(100, 350, "Using a copy of accompany, you have "+accompanies[player]+" copies remaining.")
@@ -215,6 +221,8 @@ class optionMenu extends Phaser.Scene {
                 // Go to adjacent city if adjacent cities = 2
                 else {
                     this.adjacentCityText = this.add.text(100, 350, "Going to adjacent city "+this.adjacentCities[1])
+                    currentScene = this.adjacentCities.indexOf(this.adjacentCities[1])
+                    currentTurn += 1
                     this.scene.start(this.adjacentCities[1])
                 }
             }
@@ -225,8 +233,8 @@ class optionMenu extends Phaser.Scene {
                 this.accompanyOptionText = this.add.text(100, 375, "YES  <-  |  ->NO")
                 // Consume a copy of accompany if player has any remaining
                 if (leftJustPressed) {
-                    if (accompanies[player] >= 1) {
-                        accompanies[player] -= 1
+                    if (inventories[player]['Accompany'] >= 1) {
+                        inventories[player]['Accompany'] -= 1
                         this.useAccompanyText.setVisible(false)
                         this.accompanyOptionText.setVisible(false)
                         this.consumeAccompanyText = this.add.text(100, 350, "Using a copy of accompany, you have "+accompanies[player]+" copies remaining.")
