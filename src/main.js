@@ -18,9 +18,15 @@ let config = {
 
 let game = new Phaser.Game(config)
 
+// track all players 
+let players = ['player', 'Killua', 'Biscuit', 'Genthru', 'Bara', 'Nickes', 'Phinks', 'Machi', 'Feitan', 'Nobunaga', 'Hisoka']
+let accompanies = {'player': 5, 'Killua': 5, 'Biscuit': 5, 'Genthru': 5, 'Bara': 5, 'Nickes': 5, 'Phinks': 5, 'Machi': 5, 'Feitan': 5, 'Nobunaga': 5, 'Hisoka': 5}
+let cards = {'player': {}, 'Killua': {}, 'Biscuit': {}, 'Genthru': {}, 'Bara': {}, 'Nickes': {}, 'Phinks': {}, 'Machi': {}, 'Feitan': {}, 'Nobunaga': {}, 'Hisoka': {}}
+
 // reserve keyboard vars
 let keySpace, score
 let currentScene = 0
+let currentTurn = 1
 // text configuration
 let textConfig = {
   fontSize: '28px',
