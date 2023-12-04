@@ -44,10 +44,13 @@ class Scene2 extends Phaser.Scene {
         this.dialogue2 = this.add.text(100, 75, "Would you like to purchase any cards? (Use arrow keys)").setColor('#000000')
         this.dialogue3 = this.add.text(100, 100, "YES<-  |  ->NO").setColor('#000000')
 
-        // Randomly select a card from the game available for purchase
+        // Randomly select a card from the game w/copies remaining to put up in the store
         // & withdraw random # of copies from the game
         this.itemPrice = 100
         this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
+        while (!(gameCards[this.storeItem] > 0)) {
+            this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
+        }
         this.itemQuantity = this.getRandomInt(gameCards[this.storeItem]) + 1
         gameCards[this.storeItem] -= this.itemQuantity
     }
@@ -75,6 +78,7 @@ class Scene2 extends Phaser.Scene {
                 this.itemAvailableText = this.add.text(100, 100, "We currently have "+this.itemQuantity+" copies in stock today.").setColor('#000000')
                 
                 // Player purchases the maximum # of copies of store item they can buy w/their balance
+                // However remaining copies left in stock after player purchases is returned to the game
                 let numberToBuy = playerCash / this.itemPrice
                 if (numberToBuy > this.itemQuantity) {
                     inventories['player'][this.storeItem] = this.itemQuantity
@@ -85,8 +89,9 @@ class Scene2 extends Phaser.Scene {
                     inventories['player'][this.storeItem] = numberToBuy
                     playerCash -= (numberToBuy * this.itemPrice)
                 }
+                gameCards[this.storeItem] += numberToBuy
 
-                this.transactionText = this.add.text(100, 125, "You purchased "+numberToBuy+" copies of "+this.storeItem+".")
+                this.transactionText = this.add.text(100, 125, "You purchased "+numberToBuy+" copies of "+this.storeItem+".").setColor('#000000')
             }
         }
 

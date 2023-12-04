@@ -39,13 +39,18 @@ class optionMenu extends Phaser.Scene {
         this.buttons = []
         this.selectedButtonIndex = 0
 
-        // Grab & display current scene background image
+        // Grab & display current scene background image & player sprite
         this.scenes = [NaN, 'background1', 'background2']
         this.cities = [NaN, 'MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
         this.sprites = [NaN, 'player1', 'player2']
-        console.log("current scene: "+currentScene)
         this.add.image(320, 240, this.scenes[currentScene])
-        this.add.image(150, 400, this.sprites[currentScene])
+        if (currentScene == 1) {
+            console.log('scene1')
+            this.add.image(150, 400, this.sprites[currentScene])
+        }
+        else if (currentScene == 2) {
+            this.add.image(300, 350, this.sprites[currentScene])
+        }
         
         const { width, height } = this.scale
     
