@@ -5,8 +5,8 @@ class Scene2 extends Phaser.Scene {
 
     preload() {
         // load images/tile sprites
-        this.load.image('player', './assets/player.png')
-        this.load.image('background1', './assets/background.png')
+        this.load.image('player2', './assets/playerBig.png')
+        this.load.image('background2', './assets/background2.png')
         this.load.audio('music', './assets/backgroundMusic.wav')
     }
 
@@ -26,10 +26,10 @@ class Scene2 extends Phaser.Scene {
         this.music = this.sound.play('music', soundConfig)
 
         // load background image
-        this.add.image(320, 240, 'background1')
+        this.add.image(320, 240, 'background2')
 
         // load player sprite
-        this.add.image(150, 400, 'player')
+        this.add.image(300, 350, 'player2')
     }
 
     update() {

@@ -9,8 +9,10 @@ class optionMenu extends Phaser.Scene {
   
     preload() {
         // load images/tile sprites
-        this.load.image('player', './assets/player.png')
+        this.load.image('player1', './assets/player.png')
+        this.load.image('player2', './assets/playerBig.png')
         this.load.image('background1', './assets/background.png')
+        this.load.image('background2', './assets/background2.png')
         this.load.audio('music', './assets/backgroundMusic.wav')
         this.load.image("glass-panel", "assets/PNG/glassPanel.png")
         this.load.image("cursor-hand", "assets/PNG/cursor_hand.png")
@@ -38,9 +40,11 @@ class optionMenu extends Phaser.Scene {
         this.selectedButtonIndex = 0
 
         // Grab & display current scene background image
-        let scenes = [NaN, 'background1']
+        let scenes = [NaN, 'background1', 'background2']
         let cities = [NaN, 'MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
+        let sprites = [NaN, 'player1', 'player2']
         this.add.image(320, 240, scenes[currentScene])
+        this.add.image(150, 400, sprites[currentScene])
         
         const { width, height } = this.scale
     
@@ -121,6 +125,7 @@ class optionMenu extends Phaser.Scene {
         this.checkCardsButton.on("selected", () => {
             console.log("credits")
         })
+
     }
   
     selectButton(index) {
@@ -200,6 +205,7 @@ class optionMenu extends Phaser.Scene {
                     if (leftJustPressed) {
                         if (inventories[player]['Accompany'] >= 1) {
                             inventories[player]['Accompany'] -= 1
+                            currentTurn += 1
                             this.useAccompanyText.setVisible(false)
                             this.accompanyOptionText.setVisible(false)
                             this.consumeAccompanyText = this.add.text(100, 350, "Using a copy of accompany, you have "+accompanies[player]+" copies remaining.")
@@ -235,6 +241,7 @@ class optionMenu extends Phaser.Scene {
                 if (leftJustPressed) {
                     if (inventories[player]['Accompany'] >= 1) {
                         inventories[player]['Accompany'] -= 1
+                        currentTurn += 1
                         this.useAccompanyText.setVisible(false)
                         this.accompanyOptionText.setVisible(false)
                         this.consumeAccompanyText = this.add.text(100, 350, "Using a copy of accompany, you have "+accompanies[player]+" copies remaining.")

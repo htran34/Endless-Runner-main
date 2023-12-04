@@ -17,11 +17,16 @@ class mainMenu extends Phaser.Scene {
 
         // initialize score
         score = 0
+
+        // initialize all NPC player locations at random cities
+        for (let i = 1; i < players.length; i++) {
+            locations[players[i]] = Math.random(1, 6)
+        }
     }
     update() {
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
             game.settings = {}
-            currentScene = 1
+            currentScene  = 1
             this.sound.play('start')
             this.scene.start('MASSADORA')
           }

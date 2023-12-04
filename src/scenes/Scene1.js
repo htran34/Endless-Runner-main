@@ -30,6 +30,18 @@ class Scene1 extends Phaser.Scene {
 
         // load player sprite
         this.add.image(150, 400, 'player')
+
+        // Dialogue
+        this.dialogue1 = this.add.text(20, 300, "Welcome to Massadora, starting point of")
+        this.dialogue2 = this.add.text(20, 325, "Greed Island where all players begin!")
+        if (firstSpawn) {
+            this.dialogue3 = this.add.text(20, 350, "There's many different cards in Greed Island but for now,")
+            this.dialogue4 = this.add.text(20, 375, "all players just begin with the card Accompany.")
+            this.dialogue5 = this.add.text(20, 400, "Here's 5 copies of Accompany. Use Accompany to travel to")
+            this.dialogue6 = this.add.text(20, 425, "any location on the island!")
+            firstSpawn = false
+        }
+        this.dialogue3 = this.add.text(20, 450, "(Press SPACE to view the game options menu.)")
     }
 
     update() {
