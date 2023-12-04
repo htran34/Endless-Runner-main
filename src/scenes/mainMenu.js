@@ -7,6 +7,10 @@ class mainMenu extends Phaser.Scene {
         this.load.audio('start', './assets/gameStart.wav')
     }
 
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
     create() {
         // display various menu elements
         this.add.rectangle(200, 0, 1000, 1000, 0x63a0fd)   // sets menu background color              
@@ -20,7 +24,7 @@ class mainMenu extends Phaser.Scene {
 
         // initialize all NPC player locations at random cities
         for (let i = 1; i < players.length; i++) {
-            locations[players[i]] = Math.random(1, 6)
+            locations[players[i]] = this.getRandomInt(5) + 1
         }
     }
     update() {

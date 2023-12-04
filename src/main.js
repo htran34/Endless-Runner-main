@@ -24,7 +24,7 @@ let players = ['player', 'Killua', 'Biscuit', 'Genthru', 'Bara', 'Nickes', 'Phin
 let inventories = {'player': {'Accompany': 5}, 'Killua': {'Accompany': 5}, 'Biscuit': {'Accompany': 5}, 'Genthru': {'Accompany': 5}, 'Bara': {'Accompany': 5}, 'Nickes': {'Accompany': 5}, 'Phinks': {'Accompany': 5}, 'Machi': {'Accompany': 5}, 'Feitan': {'Accompany': 5}, 'Nobunaga': {'Accompany': 5}, 'Hisoka': {'Accompany': 5}}
 let gameCards = {'Accompany': 10, 'Defensive Wall': 10, 'Reflect': 10, 'Pickpocket': 10, 'Mug': 10, 'Mimic': 10, 'Clone': 10, 'Fake': 10, 'Dispel': 10, 'Relegate': 10, 'Peek': 10, 'Bullet': 10}
 let locations = {}
-let playerCash = 0
+let playerCash = 100
 let firstSpawn = true
 
 // reserve keyboard vars
