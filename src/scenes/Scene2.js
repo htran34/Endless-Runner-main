@@ -20,7 +20,7 @@ class Scene2 extends Phaser.Scene {
 
         // deactivate & reset space key capture from menu
         this.input.keyboard.removeCapture('SPACE')
-        keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
+        keySpace2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
         // play music
         this.music = this.sound.play('music', soundConfig)
@@ -33,7 +33,7 @@ class Scene2 extends Phaser.Scene {
     }
 
     update() {
-      if (Phaser.Input.Keyboard.JustDown(keySpace)) {
+      if (Phaser.Input.Keyboard.JustDown(keySpace2)) {
           this.scene.start('selectScene')
       }
     }

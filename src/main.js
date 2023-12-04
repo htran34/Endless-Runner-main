@@ -28,7 +28,7 @@ let playerCash = 0
 let firstSpawn = true
 
 // reserve keyboard vars
-let keySpace, score
+let keySpace, keySpace2, keySpace3, keySpace4, keySpace5, score
 let currentScene = 0
 let currentTurn = 1
 // text configuration

@@ -40,11 +40,12 @@ class optionMenu extends Phaser.Scene {
         this.selectedButtonIndex = 0
 
         // Grab & display current scene background image
-        let scenes = [NaN, 'background1', 'background2']
-        let cities = [NaN, 'MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
-        let sprites = [NaN, 'player1', 'player2']
-        this.add.image(320, 240, scenes[currentScene])
-        this.add.image(150, 400, sprites[currentScene])
+        this.scenes = [NaN, 'background1', 'background2']
+        this.cities = [NaN, 'MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
+        this.sprites = [NaN, 'player1', 'player2']
+        console.log("current scene: "+currentScene)
+        this.add.image(320, 240, this.scenes[currentScene])
+        this.add.image(150, 400, this.sprites[currentScene])
         
         const { width, height } = this.scale
     
@@ -98,17 +99,17 @@ class optionMenu extends Phaser.Scene {
         this.travelButton.on("selected", () => {
             this.toggleButtons(objects)
             this.travelActive = true
-            this.currentCityText = this.add.text(100, 350, "You are currently in the city of " +cities[currentScene])
+            this.currentCityText = this.add.text(100, 350, "You are currently in the city of " +this.cities[currentScene])
             this.travelDirectionsText = this.add.text(100, 375, "Where would you like to travel? (Use arrow keys)")
             // Grab adjacent cities
             if (currentScene == 1) {
-                this.adjacentCities = [cities[2]]
+                this.adjacentCities = [this.cities[2]]
             }
-            else if (currentScene == (cities.length - 1)) {
-                this.adjacentCities = [cities[cities.length - 2]]
+            else if (currentScene == (this.cities.length - 1)) {
+                this.adjacentCities = [this.cities[this.cities.length - 2]]
             }
             else {
-                this.adjacentCities = [cities[currentScene - 1], cities[currentScene + 1]]
+                this.adjacentCities = [this.cities[currentScene - 1], this.cities[currentScene + 1]]
             }
             if (this.adjacentCities.length == 1) {
                 this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  ->OTHER")
@@ -190,7 +191,7 @@ class optionMenu extends Phaser.Scene {
             // LEFT arrow option
             if (leftJustPressed) {
                 this.adjacentCityText = this.add.text(100, 350, "Going to adjacent city "+this.adjacentCities[0])
-                currentScene = this.adjacentCities.indexOf(this.adjacentCities[0])
+                currentScene = this.cities.indexOf(this.adjacentCities[0])
                 currentTurn += 1
                 this.scene.start(this.adjacentCities[0])
             }
@@ -227,7 +228,7 @@ class optionMenu extends Phaser.Scene {
                 // Go to adjacent city if adjacent cities = 2
                 else {
                     this.adjacentCityText = this.add.text(100, 350, "Going to adjacent city "+this.adjacentCities[1])
-                    currentScene = this.adjacentCities.indexOf(this.adjacentCities[1])
+                    currentScene = this.cities.indexOf(this.adjacentCities[1])
                     currentTurn += 1
                     this.scene.start(this.adjacentCities[1])
                 }
