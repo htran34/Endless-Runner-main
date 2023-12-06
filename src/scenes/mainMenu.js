@@ -5,6 +5,7 @@ class mainMenu extends Phaser.Scene {
 
     preload() {
         this.load.audio('start', './assets/gameStart.wav')
+        this.load.audio('music', './assets/backgroundMusic.wav')
     }
 
     getRandomInt(max) {
@@ -32,6 +33,7 @@ class mainMenu extends Phaser.Scene {
             game.settings = {}
             currentScene  = 1
             this.sound.play('start')
+            this.music = this.sound.play('music', soundConfig)
             this.scene.start('MASSADORA')
           }
     }

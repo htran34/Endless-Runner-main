@@ -7,7 +7,6 @@ class Scene4 extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('player', './assets/player.png')
         this.load.image('background1', './assets/background.png')
-        this.load.audio('music', './assets/backgroundMusic.wav')
     }
 
     create() {
@@ -21,9 +20,6 @@ class Scene4 extends Phaser.Scene {
         // deactivate & reset space key capture from menu
         this.input.keyboard.removeCapture('SPACE')
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-
-        // play music
-        this.music = this.sound.play('music', soundConfig)
 
         // load background image
         this.add.image(320, 240, 'background1')

@@ -11,7 +11,6 @@ class Scene2 extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('player2', './assets/playerBig.png')
         this.load.image('background2', './assets/background2.png')
-        this.load.audio('music', './assets/backgroundMusic.wav')
     }
 
     getRandomInt(max) {
@@ -29,9 +28,6 @@ class Scene2 extends Phaser.Scene {
         // deactivate & reset space key capture from menu
         this.input.keyboard.removeCapture('SPACE')
         keySpace2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-
-        // play music
-        this.music = this.sound.play('music', soundConfig)
 
         // load background image
         this.add.image(320, 240, 'background2')
@@ -93,6 +89,11 @@ class Scene2 extends Phaser.Scene {
 
                 this.transactionText = this.add.text(100, 125, "You purchased "+numberToBuy+" copies of "+this.storeItem+".").setColor('#000000')
             }
+        }
+        else if (rightJustPressed) {
+            this.toggleDialogue()
+            this.noCashText = this.add.text(100, 50, "Okay, have a nice day.").setColor('#000000')
+            this.optionsText = this.add.text(100, 75, "(Press SPACE to view the game options menu.)").setColor('#000000')
         }
 
         if (Phaser.Input.Keyboard.JustDown(keySpace2)) {
