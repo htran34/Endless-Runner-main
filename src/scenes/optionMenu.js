@@ -116,12 +116,13 @@ class optionMenu extends Phaser.Scene {
             else {
                 this.adjacentCities = [this.cities[currentScene - 1], this.cities[currentScene + 1]]
             }
-            if (this.adjacentCities.length == 1) {
-                this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  ->OTHER")
-            }
-            else {
-                this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  OTHER ^  |  ->" + this.adjacentCities[1])
-            }
+            // if (this.adjacentCities.length == 1) {
+            //     this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  ->OTHER")
+            // }
+            // else {
+            //     this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  OTHER ^  |  ->" + this.adjacentCities[1])
+            // }
+            this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  OTHER ^  |  ->" + this.adjacentCities[1])
         })
     
         this.questButton.on("selected", () => {
@@ -181,74 +182,73 @@ class optionMenu extends Phaser.Scene {
         }
         // Travel button functionality
         if (this.travelActive) {
+            let one = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
             const upJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.up)
             const leftJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.left)
             const rightJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.right)
-            const oneJustPressed = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+            const oneJustPressed = Phaser.Input.Keyboard.JustDown(one)
+            let keyY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
+            let keyN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
             
             // Removes previous text
-            if (((this.adjacentCities.length == 1) && (leftJustPressed || rightJustPressed)) 
-            || ((this.adjacentCities.length == 2) && (upJustPressed))) {
+            if (leftJustPressed || upJustPressed || rightJustPressed) {
                 this.currentCityText.setVisible(false)
                 this.travelDirectionsText.setVisible(false)
                 this.arrowOptionsText.setVisible(false)
             }
             
             // LEFT arrow option
-            if (leftJustPressed && !this.insideAccompany) {
+            if (leftJustPressed) {
                 console.log("LeftJustPressed, Going to adjacent city "+this.adjacentCities[0])
                 currentScene = this.cities.indexOf(this.adjacentCities[0])
                 currentTurn += 1
                 this.scene.start(this.adjacentCities[0])
             }
 
-            else if (leftJustPressed && this.insideAccompany) {
-                
+            // UP arrow option
+            else if (upJustPressed) {
+                this.useAccompanyText = this.add.text(100, 350, "Use a copy of Accompany to travel to any city?")
+                this.accompanyOptionText = this.add.text(100, 375, "Y<-  |  ->N")
+                // Consume a copy of accompany if player has any remaining
+                if (keyY.isDown) {
+                    if (inventories[player]['Accompany'] >= 1) {
+                        inventories[player]['Accompany'] -= 1
+                        currentTurn += 1
+                        this.useAccompanyText.setVisible(false)
+                        this.accompanyOptionText.setVisible(false)
+                        this.consumeAccompanyText = this.add.text(100, 350, "Using a copy of accompany, you have "+accompanies[player]+" copies remaining.")
+                        this.destinationText = this.add.text(100, 375, "Where would you like to go?")
+                        if (oneJustPressed) {
+                            this.scene.start(this.cities[1])
+                        }
+                    }
+                    // Go back if player has no accompanies remaining
+                    else {
+                        this.useAccompanyText.setVisible(false)
+                        this.accompanyOptionText.setVisible(false)
+                        this.noAccompaniesText = this.add.text(100, 350, "You have no copies of accompany remaining.")
+                        this.scene.start(this.cities[currentScene])
+                    }
+                }
+                else if (rightJustPressed) {
+                    this.scene.start(this.cities[currentScene])
+                }
             }
             
             // RIGHT arrow option
             else if (rightJustPressed) {
-                // Go to ANY city with accompany if adjacent cities = 1
-                if (this.adjacentCities.length == 2) {
-                    console.log("Length 2, Going to adjacent city "+this.adjacentCities[1])
+                console.log("RightJustPressed, Going to adjacent city ")
+                if (this.adjacentCities.length == 1) {
+                    currentScene = this.cities.indexOf(this.adjacentCities[0])
+                    currentTurn += 1
+                    this.scene.start(this.adjacentCities[0])
+                }
+                else if (this.adjacentCities.length == 2) {
                     currentScene = this.cities.indexOf(this.adjacentCities[1])
                     currentTurn += 1
                     this.scene.start(this.adjacentCities[1])
                 }
-                else {
-                    this.insideAccompany = true
-                }
             }
-            
-            // UP arrow option
-            // else if (upJustPressed && (this.adjacentCities.length == 2)) {
-            //     this.useAccompanyText = this.add.text(100, 350, "Use a copy of Accompany to travel to any city?")
-            //     this.accompanyOptionText = this.add.text(100, 375, "YES  <-  |  ->NO")
-            //     // Consume a copy of accompany if player has any remaining
-            //     if (leftJustPressed) {
-            //         if (inventories[player]['Accompany'] >= 1) {
-            //             inventories[player]['Accompany'] -= 1
-            //             currentTurn += 1
-            //             this.useAccompanyText.setVisible(false)
-            //             this.accompanyOptionText.setVisible(false)
-            //             this.consumeAccompanyText = this.add.text(100, 350, "Using a copy of accompany, you have "+accompanies[player]+" copies remaining.")
-            //             this.destinationText = this.add.text(100, 375, "Where would you like to go?")
-            //             if (oneJustPressed) {
-            //                 this.scene.start(this.cities[1])
-            //             }
-            //         }
-            //         else {
-            //             this.useAccompanyText.setVisible(false)
-            //             this.accompanyOptionText.setVisible(false)
-            //             this.noAccompaniesText = this.add.text(100, 350, "You have no copies of accompany remaining.")
-            //             this.scene.start(this.cities[currentScene])
-            //         }
-            //     }
-            //     // Go back if player has no accompanies remaining
-            //     else if (rightJustPressed) {
-            //         this.scene.start(this.cities[currentScene])
-            //     }
-            // }
         }
             
 
