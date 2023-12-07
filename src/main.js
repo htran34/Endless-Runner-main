@@ -46,6 +46,7 @@ let quests = {'MASSADORA': false, 'CARD SHOP': false, 'BUNZEN': false, 'AIAI': f
 let keySpace, keySpace2, keySpace3, keySpace4, keySpace5, score
 let currentScene = 0
 let currentTurn = 1
+let difficultyLevels = [1, 2, 3]
 // text configuration
 let textConfig = {
   fontSize: '28px',

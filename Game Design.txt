@@ -23,11 +23,10 @@ Greed Island Game Design
   values are quantaties remaining.) for both the game world & each individual player 
 - Another dictionary to keep track of transformation limits of all cards in the game (cards
   can be transformed through spells)
-- Difficulty Levels (increasing # of cards NPC players will consume per turn)
-  Implement increasing # of cards consumed by increasing chance of NPCs entering quests instead of other actions
-	- Easy
-	- Normal
-	- Hard
+- Difficulty Levels (increasing # of cards each NPC player will consume per turn)
+	- Easy: 1
+	- Normal: 2
+	- Hard: 3
 - Cards
 	- Accompany: Travel to any city. 
 	- Defensive Wall: Protect yourself from an enemy attack spell.
