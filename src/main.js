@@ -13,7 +13,7 @@ let config = {
           debug: false
       }
     },
-    scene: [mainMenu, optionMenu, Scene1, Scene2, Scene3, Scene4, Scene5]
+    scene: [mainMenu, optionMenu, accompanyScene, Scene1, Scene2, Scene3, Scene4, Scene5]
 };
 
 let game = new Phaser.Game(config)
@@ -34,7 +34,7 @@ let inventories = { 'player':   {'Accompany': 5, 'Defensive Wall': 0, 'Reflect':
                     'Hisoka':   {'Accompany': 5, 'Defensive Wall': 0, 'Reflect': 0, 'Pickpocket': 0, 'Mug': 0, 'Mimic': 0, 'Clone': 0, 'Fake': 0, 'Dispel': 0, 'Relegate': 0, 'Peek': 0, 'Bullet': 0}
                   }
 let gameCards = {'Accompany': 10, 'Defensive Wall': 10, 'Reflect': 10, 'Pickpocket': 10, 'Mug': 10, 'Mimic': 10, 'Clone': 10, 'Fake': 10, 'Dispel': 10, 'Relegate': 10, 'Peek': 10, 'Bullet': 10}
-let locations = {}
+let locations = ['MASSADORA', 'CARD SHOP']
 let playerCash = 100
 let playerHasClothes = true
 let firstSpawn = true

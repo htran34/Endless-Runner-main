@@ -13,7 +13,6 @@ class optionMenu extends Phaser.Scene {
         this.load.image('player2', './assets/playerBig.png')
         this.load.image('background1', './assets/background.png')
         this.load.image('background2', './assets/background2.png')
-        this.load.audio('music', './assets/backgroundMusic.wav')
         this.load.image("glass-panel", "assets/PNG/glassPanel.png")
         this.load.image("cursor-hand", "assets/PNG/cursor_hand.png")
     }
@@ -116,12 +115,6 @@ class optionMenu extends Phaser.Scene {
             else {
                 this.adjacentCities = [this.cities[currentScene - 1], this.cities[currentScene + 1]]
             }
-            // if (this.adjacentCities.length == 1) {
-            //     this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  ->OTHER")
-            // }
-            // else {
-            //     this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  OTHER ^  |  ->" + this.adjacentCities[1])
-            // }
             this.arrowOptionsText = this.add.text(100, 400, this.adjacentCities[0] + "<-  |  OTHER ^  |  ->" + this.adjacentCities[1])
         })
     
@@ -162,8 +155,16 @@ class optionMenu extends Phaser.Scene {
     }
 
     consumeTurn() {
-
+        currentTurn += 1
     }
+
+    wait(ms){
+        var start = new Date().getTime();
+        var end = start;
+        while(end < start + ms) {
+          end = new Date().getTime();
+       }
+     }
   
     update() {
         // Activates button functionality
@@ -182,13 +183,9 @@ class optionMenu extends Phaser.Scene {
         }
         // Travel button functionality
         if (this.travelActive) {
-            let one = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
             const upJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.up)
             const leftJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.left)
             const rightJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.right)
-            const oneJustPressed = Phaser.Input.Keyboard.JustDown(one)
-            let keyY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
-            let keyN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
             
             // Removes previous text
             if (leftJustPressed || upJustPressed || rightJustPressed) {
@@ -201,36 +198,21 @@ class optionMenu extends Phaser.Scene {
             if (leftJustPressed) {
                 console.log("LeftJustPressed, Going to adjacent city "+this.adjacentCities[0])
                 currentScene = this.cities.indexOf(this.adjacentCities[0])
-                currentTurn += 1
+                this.consumeTurn()
                 this.scene.start(this.adjacentCities[0])
             }
 
             // UP arrow option
             else if (upJustPressed) {
-                this.useAccompanyText = this.add.text(100, 350, "Use a copy of Accompany to travel to any city?")
-                this.accompanyOptionText = this.add.text(100, 375, "Y<-  |  ->N")
-                // Consume a copy of accompany if player has any remaining
-                if (keyY.isDown) {
-                    if (inventories[player]['Accompany'] >= 1) {
-                        inventories[player]['Accompany'] -= 1
-                        currentTurn += 1
-                        this.useAccompanyText.setVisible(false)
-                        this.accompanyOptionText.setVisible(false)
-                        this.consumeAccompanyText = this.add.text(100, 350, "Using a copy of accompany, you have "+accompanies[player]+" copies remaining.")
-                        this.destinationText = this.add.text(100, 375, "Where would you like to go?")
-                        if (oneJustPressed) {
-                            this.scene.start(this.cities[1])
-                        }
-                    }
-                    // Go back if player has no accompanies remaining
-                    else {
-                        this.useAccompanyText.setVisible(false)
-                        this.accompanyOptionText.setVisible(false)
-                        this.noAccompaniesText = this.add.text(100, 350, "You have no copies of accompany remaining.")
-                        this.scene.start(this.cities[currentScene])
-                    }
+                if (inventories['player']['Accompany'] >= 1) {
+                    inventories['player']['Accompany'] -= 1
+                    currentTurn += 1
+                    this.scene.start('ACCOMPANY')
                 }
-                else if (rightJustPressed) {
+                else {
+                    this.noAccompaniesText = this.add.text(100, 350, "You have no copies of accompany remaining.")
+                    this.optionsMenuText = this.add.text(100, 375, "Staying in "+this.cities[currentScene])
+                    this.wait(3000)
                     this.scene.start(this.cities[currentScene])
                 }
             }
@@ -250,8 +232,6 @@ class optionMenu extends Phaser.Scene {
                 }
             }
         }
-            
-
 
         if (this.questActive) {
             quests[this.cities[currentScene]] = true
