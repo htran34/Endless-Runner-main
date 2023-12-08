@@ -15,6 +15,7 @@ class optionMenu extends Phaser.Scene {
         this.load.image('background2', './assets/background2.png')
         this.load.image("glass-panel", "assets/PNG/glassPanel.png")
         this.load.image("cursor-hand", "assets/PNG/cursor_hand.png")
+        this.load.audio('boop', './assets/boop.wav')
     }
   
     toggleButtons(objects) {
@@ -135,16 +136,19 @@ class optionMenu extends Phaser.Scene {
         this.questButton.on("selected", () => {
             this.toggleButtons(objects)
             this.questActive = true
+            this.boop = this.sound.play('boop')
         })
     
         this.checkCardsButton.on("selected", () => {
             this.toggleButtons(objects)
             this.checkActive = true
+            this.boop = this.sound.play('boop')
         })
 
         this.useCardButton.on("selected", () => {
             this.toggleButtons(objects)
             this.useCardActive = true
+            this.boop = this.sound.play('boop')
         })
     }
   
@@ -216,7 +220,6 @@ class optionMenu extends Phaser.Scene {
             
             // LEFT arrow option
             if (leftJustPressed) {
-                console.log("LeftJustPressed, Going to adjacent city "+this.adjacentCities[0])
                 currentScene = this.cities.indexOf(this.adjacentCities[0])
                 this.consumeTurn()
                 this.scene.start(this.adjacentCities[0])
@@ -239,7 +242,6 @@ class optionMenu extends Phaser.Scene {
             
             // RIGHT arrow option
             else if (rightJustPressed) {
-                console.log("RightJustPressed, Going to adjacent city ")
                 if (this.adjacentCities.length == 1) {
                     currentScene = this.cities.indexOf(this.adjacentCities[0])
                     currentTurn += 1
