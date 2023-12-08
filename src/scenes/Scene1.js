@@ -12,6 +12,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image('player', './assets/player.png')
         this.load.image('villager', './assets/villager.png')
         this.load.image('background1', './assets/background.png')
+        this.load.audio('levelUp', './assets/levelUp.wav')
     }
 
     getRandomInt(max) {
@@ -75,6 +76,7 @@ class Scene1 extends Phaser.Scene {
                 this.toggleDialogue()
                 if (playerHasClothes) {
                     playerHasClothes = false
+                    this.levelUp = this.sound.play('levelUp')
                     this.dialogue5 = this.add.text(10, 300, "(You gave the clothes off your back)")
                     this.dialogue6 = this.add.text(10, 325, "Thank you sir!!! You saved us!!!")
                     this.dialogue7 = this.add.text(10, 350, "We are eterally grateful for this deed you've done for us.")
@@ -83,9 +85,12 @@ class Scene1 extends Phaser.Scene {
                         this.giftItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
                     }
                     this.itemQuantity = this.getRandomInt(gameCards[this.giftItem]) + 1
+                    this.cashReward = this.getRandomInt(6) * 100
+                    playerCash += this.cashReward
                     gameCards[this.giftItem] -= this.itemQuantity
                     inventories['player'][this.giftItem] += this.itemQuantity
-                    this.dialogue8 = this.add.text(10, 375, "You obtained " +this.itemQuantity+" copies of "+this.giftItem+".")
+                    this.dialogue8 = this.add.text(10, 375, "You obtained " +this.itemQuantity+" copies of "+this.giftItem+"")
+                    this.dialogue8 = this.add.text(10, 400, "and " +this.cashReward+ " credits.")
 
                 }
                 else {
