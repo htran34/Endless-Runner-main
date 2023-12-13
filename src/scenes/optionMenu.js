@@ -66,14 +66,6 @@ class optionMenu extends Phaser.Scene {
                 this.add.image(300, 350, this.sprites[currentScene])
             }
         }
-        // else if (currentScene == 3) {
-        //     if (!playerHasClothes) {
-        //         this.add.image(150, 400, this.sprites[currentScene + 2])
-        //     }
-        //     else {
-        //         this.add.image(150, 400, this.sprites[currentScene + 2])
-        //     }
-        // }
         else if (currentScene == 5) {
             if (!playerHasClothes) {
                 this.add.image(50, 150, this.sprites[currentScene + 2])
@@ -209,8 +201,39 @@ class optionMenu extends Phaser.Scene {
         button.emit("selected")
     }
 
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
     consumeTurn() {
         currentTurn += 1
+        let cardsRemaining = 0
+        // check to make sure there are cards remaining in the game
+        for (let i = 0; i < Object.keys(gameCards).length; i++) {
+            cardsRemaining += gameCards[Object.keys(gameCards)[i]]
+        }
+        if (cardsRemaining == 0) {
+            this.scene.start('GAME OVER')
+        }
+        // Iterate through all the NPC players in the game and have them each find a card
+        // with copies remaining within the game & consume a copy of it
+        for (let i = 1; i < players.length; i++) {
+            let card = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
+            while (!(gameCards[card] > 0)) {
+                let card = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
+            }
+            inventories[players[i]][card] += 1
+            gameCards[card] -= 1
+            cardsRemaining -= 1
+            if (cardsRemaining == 0) {
+                this.scene.start('GAME OVER')
+            }
+        }
+        console.log('cards remaining: ', cardsRemaining)
+        // console.log('\n')
+        // console.log(inventories)
+        // console.log('\n')
+        // console.log(gameCards)
     }
 
     wait(ms){
@@ -260,7 +283,7 @@ class optionMenu extends Phaser.Scene {
             else if (upJustPressed) {
                 if (inventories['player']['Accompany'] >= 1) {
                     inventories['player']['Accompany'] -= 1
-                    currentTurn += 1
+                    this.consumeTurn()
                     this.scene.start('ACCOMPANY')
                 }
                 else {
@@ -287,6 +310,7 @@ class optionMenu extends Phaser.Scene {
         }
 
         if (this.questActive) {
+            this.consumeTurn()
             quests[this.cities[currentScene]] = true
             this.scene.start(this.cities[currentScene])
         }

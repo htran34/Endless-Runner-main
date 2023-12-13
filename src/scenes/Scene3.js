@@ -102,7 +102,13 @@ class Scene3 extends Phaser.Scene {
             }
             else if (rightJustPressed) {
                 // Use a copy of accompany to travel out of Bunzen if player has any accompany remaining
-                if (inventories['player']['Accompany'] >= 1) {}
+                if (inventories['player']['Accompany'] >= 1) {
+                    inventories['player']['Accompany'] -= 1
+                    this.scene.start('ACCOMPANY')
+                }
+                else {
+                    this.scene.start('BUNZEN')
+                }
             }
         }
 

@@ -87,7 +87,7 @@ class Scene2 extends Phaser.Scene {
                     inventories['player'][this.storeItem] = numberToBuy
                     playerCash -= (numberToBuy * this.itemPrice)
                 }
-                gameCards[this.storeItem] += numberToBuy
+                gameCards[this.storeItem] += this.itemQuantity - numberToBuy
 
                 this.transactionText = this.add.text(100, 125, "You purchased "+numberToBuy+" copies of "+this.storeItem+".").setColor('#000000')
             }
@@ -96,6 +96,7 @@ class Scene2 extends Phaser.Scene {
             this.toggleDialogue()
             this.noCashText = this.add.text(100, 50, "Okay, have a nice day.").setColor('#000000')
             this.optionsText = this.add.text(100, 75, "(Press SPACE to view the game options menu.)").setColor('#000000')
+            gameCards[this.storeItem] += this.itemQuantity
         }
 
         if (Phaser.Input.Keyboard.JustDown(keySpace2)) {

@@ -54,6 +54,7 @@ class Scene1 extends Phaser.Scene {
                 this.dialogue3 = this.add.text(20, 450, "(Press SPACE to view the game options menu.)")
             }
         }
+        // Quest introduction dialogue
         else {
             this.dialogue1 = this.add.text(10, 300, "Please help us, a horrible pandemic has plagued our village!")
             this.dialogue2 = this.add.text(10, 325, "Many of our very young & old people are in desperate need of help!")
@@ -70,10 +71,12 @@ class Scene1 extends Phaser.Scene {
     }
 
     update() {
+        // Massadora Quest
         if (quests['MASSADORA']) {
             const leftJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.left)
             const rightJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.right)
             this.add.image(400, 430, 'villager')
+            // Player can choose to give their clothes or not
             if (leftJustPressed) {
                 this.toggleDialogue()
                 if (playerHasClothes) {
