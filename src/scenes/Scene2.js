@@ -10,6 +10,7 @@ class Scene2 extends Phaser.Scene {
     preload() {
         // load images/tile sprites
         this.load.image('player2', './assets/playerBig.png')
+        this.load.image('player2Naked', './assets/playerNakedBig.png')
         this.load.image('background2', './assets/background2.png')
     }
 
@@ -29,7 +30,12 @@ class Scene2 extends Phaser.Scene {
         this.add.image(320, 240, 'background2')
 
         // load player sprite
-        this.add.image(300, 350, 'player2')
+        if (!playerHasClothes) {
+            this.add.image(300, 350, 'player2Naked')
+        }
+        else {
+            this.add.image(300, 350, 'player2')
+        }
 
         // Dialogue
         this.dialogue1 = this.add.text(100, 50, "Welcome to the CARD SHOP!").setColor('#000000')
@@ -93,7 +99,6 @@ class Scene2 extends Phaser.Scene {
         }
 
         if (Phaser.Input.Keyboard.JustDown(keySpace2)) {
-            this.toggleDialogue()
             this.scene.start('selectScene')
         }
     }

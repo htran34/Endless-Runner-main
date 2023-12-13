@@ -30,6 +30,7 @@ class Scene5 extends Phaser.Scene {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
+            quests['BADLANDS'] = false
             this.scene.start('selectScene')
         }
     }

@@ -10,6 +10,7 @@ class Scene1 extends Phaser.Scene {
     preload() {
         // load images/tile sprites
         this.load.image('player', './assets/player.png')
+        this.load.image('playerNaked', './assets/playerNaked.png')
         this.load.image('villager', './assets/villager.png')
         this.load.image('background1', './assets/background.png')
         this.load.audio('levelUp', './assets/levelUp.wav')
@@ -31,7 +32,12 @@ class Scene1 extends Phaser.Scene {
         this.add.image(320, 240, 'background1')
 
         // load player sprite
-        this.add.image(150, 400, 'player')
+        if (!playerHasClothes) {
+            this.add.image(150, 400, 'playerNaked')
+        }
+        else {
+            this.add.image(150, 400, 'player')
+        }
 
         // Dialogue
         if (!quests['MASSADORA']) {
@@ -102,6 +108,7 @@ class Scene1 extends Phaser.Scene {
         }
 
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
+            quests['MASSADORA'] = false
             this.scene.start('selectScene')
         }
     }

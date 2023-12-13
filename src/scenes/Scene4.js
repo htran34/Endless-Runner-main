@@ -10,6 +10,7 @@ class Scene4 extends Phaser.Scene {
     preload() {
         // load images/tile sprites
         this.load.image('player', './assets/player.png')
+        this.load.image('playerNaked', './assets/playerNaked.png')
         this.load.image('background4', './assets/background4.png')
     }
 
@@ -25,7 +26,12 @@ class Scene4 extends Phaser.Scene {
         this.add.image(320, 240, 'background4')
 
         // load player sprite
-        this.add.image(150, 400, 'player')
+        if (!playerHasClothes) {
+            this.add.image(150, 400, 'playerNaked')
+        }
+        else {
+            this.add.image(150, 400, 'player')
+        }
 
         // Dialogue
         if (!quests['AIAI']) {
@@ -66,6 +72,7 @@ class Scene4 extends Phaser.Scene {
         }
     
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
+            quests['AIAI'] = false
             this.scene.start('selectScene')
         }
     }
