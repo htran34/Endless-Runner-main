@@ -6,7 +6,7 @@ class Scene5 extends Phaser.Scene {
     preload() {
         // load images/tile sprites
         this.load.image('player', './assets/player.png')
-        this.load.image('background1', './assets/background.png')
+        this.load.image('background5', './assets/background5.png')
     }
 
     create() {
@@ -22,15 +22,15 @@ class Scene5 extends Phaser.Scene {
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
         // load background image
-        this.add.image(320, 240, 'background1')
+        this.add.image(320, 240, 'background5')
 
         // load player sprite
-        this.add.image(150, 400, 'player')
+        this.add.image(50, 150, 'player')
     }
 
     update() {
-      if (Phaser.Input.Keyboard.JustDown(keySpace)) {
-          this.scene.start('selectScene')
-      }
+        if (Phaser.Input.Keyboard.JustDown(keySpace)) {
+            this.scene.start('selectScene')
+        }
     }
 }

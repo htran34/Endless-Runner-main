@@ -13,6 +13,9 @@ class optionMenu extends Phaser.Scene {
         this.load.image('player2', './assets/playerBig.png')
         this.load.image('background1', './assets/background.png')
         this.load.image('background2', './assets/background2.png')
+        this.load.image('background3', './assets/background3.png')
+        this.load.image('background4', './assets/background4.png')
+        this.load.image('background5', './assets/background5.png')
         this.load.image("glass-panel", "assets/PNG/glassPanel.png")
         this.load.image("cursor-hand", "assets/PNG/cursor_hand.png")
         this.load.audio('boop', './assets/boop.wav')
@@ -41,15 +44,18 @@ class optionMenu extends Phaser.Scene {
         this.selectedButtonIndex = 0
 
         // Grab & display current scene background image & player sprite
-        this.scenes = [NaN, 'background1', 'background2']
+        this.scenes = [NaN, 'background1', 'background2', 'background3', 'background4', 'background5']
         this.cities = [NaN, 'MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
         this.sprites = [NaN, 'player1', 'player2']
         this.add.image(320, 240, this.scenes[currentScene])
         if (currentScene == 1) {
             this.add.image(150, 400, this.sprites[currentScene])
         }
-        else if (currentScene == 2) {
+        else if ((currentScene >= 2) && (currentScene<=4)) {
             this.add.image(300, 350, this.sprites[currentScene])
+        }
+        else if (currentScene == 5) {
+            this.add.image(50, 150, this.sprites[currentScene])
         }
         
         const { width, height } = this.scale

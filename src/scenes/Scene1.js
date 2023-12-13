@@ -23,10 +23,6 @@ class Scene1 extends Phaser.Scene {
         // boolean to check if game has to be restarted from a player loss
         this.gameEnded = false;
 
-        // // display score
-        // this.scoreDisplay = this.add.text(50, 50, 'CARDS COLLECTED: ' + score)
-        // this.scoreDisplay.setDepth(999)
-
         // deactivate & reset space key capture from menu
         this.input.keyboard.removeCapture('SPACE')
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
@@ -39,7 +35,7 @@ class Scene1 extends Phaser.Scene {
 
         // Dialogue
         if (!quests['MASSADORA']) {
-            this.dialogue1 = this.add.text(20, 300, "Welcome to Massadora, starting point of")
+            this.dialogue1 = this.add.text(20, 300, "Welcome to MASSADORA, starting point of")
             this.dialogue2 = this.add.text(20, 325, "Greed Island where all players begin!")
             if (firstSpawn) {
                 this.dialogue3 = this.add.text(20, 350, "There's many different cards in Greed Island but for now,")

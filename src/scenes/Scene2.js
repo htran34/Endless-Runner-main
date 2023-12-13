@@ -21,10 +21,6 @@ class Scene2 extends Phaser.Scene {
         // boolean to check if game has to be restarted from a player loss
         this.gameEnded = false;
 
-        // // display score
-        // this.scoreDisplay = this.add.text(50, 50, 'CARDS COLLECTED: ' + score)
-        // this.scoreDisplay.setDepth(999)
-
         // deactivate & reset space key capture from menu
         this.input.keyboard.removeCapture('SPACE')
         keySpace2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
@@ -36,7 +32,7 @@ class Scene2 extends Phaser.Scene {
         this.add.image(300, 350, 'player2')
 
         // Dialogue
-        this.dialogue1 = this.add.text(100, 50, "Welcome to the card shop.").setColor('#000000')
+        this.dialogue1 = this.add.text(100, 50, "Welcome to the CARD SHOP!").setColor('#000000')
         this.dialogue2 = this.add.text(100, 75, "Would you like to purchase any cards? (Use arrow keys)").setColor('#000000')
         this.dialogue3 = this.add.text(100, 100, "YES<-  |  ->NO").setColor('#000000')
 
