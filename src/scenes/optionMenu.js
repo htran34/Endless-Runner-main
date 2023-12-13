@@ -217,7 +217,7 @@ class optionMenu extends Phaser.Scene {
                 this.scene.start('GAME OVER')
             }
             if (gameCards[card] == 0) {
-                delete gameCards.card
+                delete gameCards[card]
             }
         }
         console.log('cards remaining: ', gameCardsRemaining)

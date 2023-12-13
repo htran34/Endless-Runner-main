@@ -14,6 +14,10 @@ class Scene3 extends Phaser.Scene {
         this.load.image('background3', './assets/background3.png')
     }
 
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
     create() {
         // boolean to check if game has to be restarted from a player loss
         this.gameEnded = false;
@@ -94,11 +98,26 @@ class Scene3 extends Phaser.Scene {
         // Bunzen Quest
         else if (quests['BUNZEN']) {
             if (leftJustPressed) {
-                this.dialogue5 = this.add.text(20, 300, "(A figure emerged from the shadows...it seems to be human?!)").setColor('#000000')
-                this.dialogue6 = this.add.text(20, 325, "You there! Give me all of your cards!").setColor('#000000')
-                this.dialogue7 = this.add.text(20, 350, "(You rummage around in your bag and throw a rock at the person)").setColor('#000000')
-                this.dialogue8 = this.add.text(20, 375, "Argh! You little runt! This isn't over!").setColor('#000000')
-                this.dialogue9 = this.add.text(20, 400, "(The person ran away, and you picked up some scattered cards on the ground.").setColor('#000000')
+                this.toggleDialogue()
+
+                // Randomly select a card remaining within the game for player to take
+                this.groundItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
+                this.itemQuantity = this.getRandomInt(gameCards[this.groundItem]) + 1
+                gameCards[this.groundItem] -= this.itemQuantity
+                if (gameCards[this.groundItem] == 0) {
+                    delete gameCards[this.groundItem]
+                }
+                gameCardsRemaining -= this.itemQuantity
+
+                // Quest dialogue
+                this.dialogue5  = this.add.text(20, 150, "(A figure emerged from the shadows...it seems to be human?!)").setColor('#000000')
+                this.dialogue6  = this.add.text(20, 175, "You there! Give me all of your cards!").setColor('#000000')
+                this.dialogue7  = this.add.text(20, 200, "(You rummage around in your bag and throw a rock at the person)").setColor('#000000')
+                this.dialogue8  = this.add.text(20, 225, "Argh! You little runt! This isn't over!").setColor('#000000')
+                this.dialogue9  = this.add.text(20, 250, "(The person ran away, and you picked up some").setColor('#000000')
+                this.dialogue10 = this.add.text(20, 275, "scattered cards on the ground.").setColor('#000000')
+                this.dialogue11 = this.add.text(20, 300, "You acquired " +this.itemQuantity+ " copies of " +this.groundItem+ ".").setColor('#000000')
+
             }
             else if (rightJustPressed) {
                 // Use a copy of accompany to travel out of Bunzen if player has any accompany remaining

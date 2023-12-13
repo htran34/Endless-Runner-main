@@ -46,9 +46,6 @@ class Scene2 extends Phaser.Scene {
         // & withdraw random # of copies from the game
         this.itemPrice = 100
         this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-        // while (!(gameCards[this.storeItem] > 0)) {
-        //     this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-        // }
         this.itemQuantity = this.getRandomInt(gameCards[this.storeItem]) + 1
         gameCards[this.storeItem] -= this.itemQuantity
     }

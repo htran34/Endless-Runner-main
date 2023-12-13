@@ -86,9 +86,6 @@ class Scene1 extends Phaser.Scene {
                     this.dialogue6 = this.add.text(10, 325, "Thank you sir!!! You saved us!!!")
                     this.dialogue7 = this.add.text(10, 350, "We are eterally grateful for this deed you've done for us.")
                     this.giftItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-                    // while (!(gameCards[this.giftItem] > 0)) {
-                    //     this.giftItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-                    // }
                     this.itemQuantity = this.getRandomInt(gameCards[this.giftItem]) + 1
                     this.cashReward = this.getRandomInt(6) * 100
                     playerCash += this.cashReward
