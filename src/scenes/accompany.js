@@ -13,11 +13,14 @@ class accompanyScene extends Phaser.Scene {
         this.load.image('player2', './assets/playerBig.png')
         this.load.image('background1', './assets/background.png')
         this.load.image('background2', './assets/background2.png')
+        this.load.image('background3', './assets/background.png')
+        this.load.image('background4', './assets/background2.png')
+        this.load.image('background5', './assets/background.png')
     }
 
     create() {
         // Grab & display current scene background image & player sprite
-        this.scenes = [NaN, 'background1', 'background2']
+        this.scenes = [NaN, 'background1', 'background2', 'background3', 'background4', 'background5']
         this.sprites = [NaN, 'player1', 'player2']
         this.add.image(320, 240, this.scenes[currentScene])
         if (currentScene == 1) {
@@ -41,18 +44,23 @@ class accompanyScene extends Phaser.Scene {
 
     update() {
         if (this.keys.Q.isDown) {
+            currentScene = 1
             this.scene.start('MASSADORA')
         }
         if (this.keys.W.isDown) {
+            currentScene = 2
             this.scene.start('CARD SHOP')
         }
         if (this.keys.E.isDown) {
+            currentScene = 3
             this.scene.start('BUNZEN')
         }
         if (this.keys.R.isDown) {
+            currentScene = 4
             this.scene.start('AIAI')
         }
         if (this.keys.T.isDown) {
+            currentScene = 5
             this.scene.start('BADLANDS')
         }
     }
