@@ -46,9 +46,9 @@ class Scene2 extends Phaser.Scene {
         // & withdraw random # of copies from the game
         this.itemPrice = 100
         this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-        while (!(gameCards[this.storeItem] > 0)) {
-            this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-        }
+        // while (!(gameCards[this.storeItem] > 0)) {
+        //     this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
+        // }
         this.itemQuantity = this.getRandomInt(gameCards[this.storeItem]) + 1
         gameCards[this.storeItem] -= this.itemQuantity
     }
@@ -88,7 +88,10 @@ class Scene2 extends Phaser.Scene {
                     playerCash -= (numberToBuy * this.itemPrice)
                 }
                 gameCards[this.storeItem] += this.itemQuantity - numberToBuy
-
+                if (gameCards[this.storeItem] == 0) {
+                    delete gameCards[this.storeItem]
+                }
+                gameCardsRemaining -= numberToBuy
                 this.transactionText = this.add.text(100, 125, "You purchased "+numberToBuy+" copies of "+this.storeItem+".").setColor('#000000')
             }
         }

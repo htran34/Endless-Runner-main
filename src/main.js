@@ -35,6 +35,7 @@ let inventories = { 'player':   {'Accompany': 5, 'Defensive Wall': 0, 'Reflect':
                   }
 let gameCards = {'Accompany': 10, 'Defensive Wall': 10, 'Reflect': 10, 'Pickpocket': 10, 'Mug': 10, 'Mimic': 10, 'Clone': 10, 'Fake': 10, 'Dispel': 10, 'Relegate': 10, 'Peek': 10, 'Bullet': 10}
 let locations = ['MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
+let gameCardsRemaining = 120
 let playerCash = 100
 let playerHasClothes = true
 let firstSpawn = true
@@ -45,7 +46,6 @@ let quests = {'MASSADORA': false, 'CARD SHOP': false, 'BUNZEN': false, 'AIAI': f
 // reserve keyboard vars
 let keySpace, keySpace2, keySpace3, keySpace4, keySpace5, score
 let currentScene = 0
-let currentTurn = 1
 let difficultyLevels = [1, 2, 3]
 // text configuration
 let textConfig = {

@@ -206,30 +206,21 @@ class optionMenu extends Phaser.Scene {
     }
 
     consumeTurn() {
-        currentTurn += 1
-        let cardsRemaining = 0
-        // check to make sure there are cards remaining in the game
-        for (let i = 0; i < Object.keys(gameCards).length; i++) {
-            cardsRemaining += gameCards[Object.keys(gameCards)[i]]
-        }
-        if (cardsRemaining == 0) {
-            this.scene.start('GAME OVER')
-        }
         // Iterate through all the NPC players in the game and have them each find a card
         // with copies remaining within the game & consume a copy of it
         for (let i = 1; i < players.length; i++) {
             let card = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-            while (!(gameCards[card] > 0)) {
-                let card = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-            }
             inventories[players[i]][card] += 1
             gameCards[card] -= 1
-            cardsRemaining -= 1
-            if (cardsRemaining == 0) {
+            gameCardsRemaining -= 1
+            if (gameCardsRemaining == 0) {
                 this.scene.start('GAME OVER')
             }
+            if (gameCards[card] == 0) {
+                delete gameCards.card
+            }
         }
-        console.log('cards remaining: ', cardsRemaining)
+        console.log('cards remaining: ', gameCardsRemaining)
         // console.log('\n')
         // console.log(inventories)
         // console.log('\n')
@@ -298,12 +289,12 @@ class optionMenu extends Phaser.Scene {
             else if (rightJustPressed) {
                 if (this.adjacentCities.length == 1) {
                     currentScene = this.cities.indexOf(this.adjacentCities[0])
-                    currentTurn += 1
+                    this.consumeTurn()
                     this.scene.start(this.adjacentCities[0])
                 }
                 else if (this.adjacentCities.length == 2) {
                     currentScene = this.cities.indexOf(this.adjacentCities[1])
-                    currentTurn += 1
+                    this.consumeTurn()
                     this.scene.start(this.adjacentCities[1])
                 }
             }
