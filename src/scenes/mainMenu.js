@@ -14,8 +14,14 @@ class mainMenu extends Phaser.Scene {
 
     create() {
         // display various menu elements
-        this.add.rectangle(200, 0, 1000, 1000, 0x63a0fd)   // sets menu background color              
-        this.add.text(150, 300, 'PRESS SPACE TO START', textConfig)
+        this.add.rectangle(200, 0, 1000, 1000, 0x006400)   // sets menu background color              
+        this.add.text(50, 125, 'PRESS SPACE TO START')
+        this.add.text(50, 175, 'CONTROLS:')
+        this.add.text(50, 200, 'USE SPACE WITHIN THE GAME TO VIEW OPTIONS MENU')
+        this.add.text(50, 225, "AND TO PRESS BUTTIONS IN THE MENU.")
+        this.add.text(50, 250, 'USE ARROW KEYS TO TRAVEL BETWEEN CITIES')
+        this.add.text(50, 275, 'AND WHEN NAVIGATING OPTIONS IN THE MENU.')
+        this.add.text(50, 300, 'USE LETTERS Q,W,E,R,T WHEN USING ACCOMPANY.')
 
         // define keys
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
