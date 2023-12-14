@@ -21,41 +21,40 @@ class Scene2 extends Phaser.Scene {
     create() {
         if (gameCardsRemaining == 0) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
-            this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
-            this.scene.stop()
+            this.add.text(270, 240, 'GAME OVER')
         }
         else if (playerCards.length == 12) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
             this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
-            this.scene.stop()
         }
-        
-        // deactivate & reset space key capture from menu
-        this.input.keyboard.removeCapture('SPACE')
-        keySpace2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
+        else {  
+            // deactivate & reset space key capture from menu
+            this.input.keyboard.removeCapture('SPACE')
+            keySpace2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
-        // load background image
-        this.add.image(320, 240, 'background2')
+            // load background image
+            this.add.image(320, 240, 'background2')
 
-        // load player sprite
-        if (!playerHasClothes) {
-            this.add.image(300, 350, 'player2Naked')
+            // load player sprite
+            if (!playerHasClothes) {
+                this.add.image(300, 350, 'player2Naked')
+            }
+            else {
+                this.add.image(300, 350, 'player2')
+            }
+
+            // Dialogue
+            this.dialogue1 = this.add.text(100, 50, "Welcome to the CARD SHOP!").setColor('#000000')
+            this.dialogue2 = this.add.text(100, 75, "Would you like to purchase any cards? (Use arrow keys)").setColor('#000000')
+            this.dialogue3 = this.add.text(100, 100, "YES<-  |  ->NO").setColor('#000000')
+
+            // Randomly select a card from the game w/copies remaining to put up in the store
+            // & withdraw random # of copies from the game
+            this.itemPrice = 100
+            this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
+            this.itemQuantity = this.getRandomInt(gameCards[this.storeItem]) + 1
+            gameCards[this.storeItem] -= this.itemQuantity
         }
-        else {
-            this.add.image(300, 350, 'player2')
-        }
-
-        // Dialogue
-        this.dialogue1 = this.add.text(100, 50, "Welcome to the CARD SHOP!").setColor('#000000')
-        this.dialogue2 = this.add.text(100, 75, "Would you like to purchase any cards? (Use arrow keys)").setColor('#000000')
-        this.dialogue3 = this.add.text(100, 100, "YES<-  |  ->NO").setColor('#000000')
-
-        // Randomly select a card from the game w/copies remaining to put up in the store
-        // & withdraw random # of copies from the game
-        this.itemPrice = 100
-        this.storeItem = Object.keys(gameCards)[this.getRandomInt(Object.keys(gameCards).length)]
-        this.itemQuantity = this.getRandomInt(gameCards[this.storeItem]) + 1
-        gameCards[this.storeItem] -= this.itemQuantity
     }
 
     toggleDialogue() {

@@ -23,51 +23,50 @@ class Scene1 extends Phaser.Scene {
     create() {
         if (gameCardsRemaining == 0) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
-            this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
-            this.scene.stop()
+            this.add.text(270, 240, 'GAME OVER')
         }
         else if (playerCards.length == 12) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
             this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
-            this.scene.stop()
-        }
-
-        // deactivate & reset space key capture from menu
-        this.input.keyboard.removeCapture('SPACE')
-        keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-
-        // load background image
-        this.add.image(320, 240, 'background1')
-
-        // load player sprite
-        if (!playerHasClothes) {
-            this.add.image(150, 400, 'playerNaked')
         }
         else {
-            this.add.image(150, 400, 'player')
-        }
+            // deactivate & reset space key capture from menu
+            this.input.keyboard.removeCapture('SPACE')
+            keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
-        // Dialogue
-        if (!quests['MASSADORA']) {
-            this.dialogue1 = this.add.text(20, 300, "Welcome to MASSADORA, starting point of")
-            this.dialogue2 = this.add.text(20, 325, "Greed Island where all players begin!")
-            if (firstSpawn) {
-                this.dialogue3 = this.add.text(20, 350, "There's many different cards in Greed Island but for now,")
-                this.dialogue4 = this.add.text(20, 375, "all players just begin with the card Accompany.")
-                this.dialogue5 = this.add.text(20, 400, "Here's 5 copies of Accompany. Use Accompany to travel to")
-                this.dialogue6 = this.add.text(20, 425, "any location on the island!")
-                firstSpawn = false
+            // load background image
+            this.add.image(320, 240, 'background1')
+
+            // load player sprite
+            if (!playerHasClothes) {
+                this.add.image(150, 400, 'playerNaked')
             }
             else {
-                this.dialogue3 = this.add.text(20, 450, "(Press SPACE to view the game options menu.)")
+                this.add.image(150, 400, 'player')
             }
-        }
-        // Quest introduction dialogue
-        else {
-            this.dialogue1 = this.add.text(10, 300, "Please help us, a horrible pandemic has plagued our village!")
-            this.dialogue2 = this.add.text(10, 325, "Many of our very young & old people are in desperate need of help!")
-            this.dialogue3 = this.add.text(10, 350, "Do you have any warm clothes you could give us? (Use arrow keys)")
-            this.dialogue4 = this.add.text(10, 375, "YES  <-  |  ->NO")
+
+            // Dialogue
+            if (!quests['MASSADORA']) {
+                this.dialogue1 = this.add.text(20, 300, "Welcome to MASSADORA, starting point of")
+                this.dialogue2 = this.add.text(20, 325, "Greed Island where all players begin!")
+                if (firstSpawn) {
+                    this.dialogue3 = this.add.text(20, 350, "There's many different cards in Greed Island but for now,")
+                    this.dialogue4 = this.add.text(20, 375, "all players just begin with the card Accompany.")
+                    this.dialogue5 = this.add.text(20, 400, "Here's 5 copies of Accompany. Use Accompany to travel to")
+                    this.dialogue6 = this.add.text(20, 425, "any location on the island!")
+                    firstSpawn = false
+                }
+                else {
+                    this.dialogue3 = this.add.text(20, 450, "(Press SPACE to view the game options menu.)")
+                }
+            }
+            // Quest introduction dialogue
+            else {
+                this.dialogue1 = this.add.text(10, 300, "Please help us, a horrible pandemic has plagued our village!")
+                this.dialogue2 = this.add.text(10, 325, "Many of our very young & old people are in desperate need of help!")
+                this.dialogue3 = this.add.text(10, 350, "Do you have any warm clothes you could give us? (Use arrow keys)")
+                this.dialogue4 = this.add.text(10, 375, "YES  <-  |  ->NO")
+            }
         }
     }
 

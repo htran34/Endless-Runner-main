@@ -12,6 +12,7 @@ class Scene3 extends Phaser.Scene {
         this.load.image('player', './assets/player.png')
         this.load.image('playerNaked', './assets/playerNaked.png')
         this.load.image('background3', './assets/background3.png')
+        this.load.image('gameover', './assets/gameover.png')
     }
 
     getRandomInt(max) {
@@ -21,52 +22,51 @@ class Scene3 extends Phaser.Scene {
     create() {
         if (gameCardsRemaining == 0) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
-            this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
-            this.scene.stop()
+            this.add.text(270, 240, 'GAME OVER')
         }
         else if (playerCards.length == 12) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
             this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
-            this.scene.stop()
-        }
-        
-        // deactivate & reset space key capture from menu
-        this.input.keyboard.removeCapture('SPACE')
-        keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-
-        // load background image
-        this.add.image(320, 240, 'background3')
-
-        // load player sprite
-        if (!playerHasClothes) {
-            this.add.image(150, 400, 'playerNaked')
         }
         else {
-            this.add.image(150, 400, 'player')
-        }
+            // deactivate & reset space key capture from menu
+            this.input.keyboard.removeCapture('SPACE')
+            keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
-        // Dialogue
-        if (!quests['BUNZEN']) {
-            this.dialogue1 = this.add.text(20, 300, "Welcome to BUNZEN, one of the largest cities in Greed Island!").setColor('#000000')
-            // Ask player if they want clothes if they don't hold clothes
+            // load background image
+            this.add.image(320, 240, 'background3')
+
+            // load player sprite
             if (!playerHasClothes) {
-                this.dialogue2 = this.add.text(20, 325, "Oh no, you're practically naked! Where are your clothes??").setColor('#000000')
-                this.dialogue3 = this.add.text(20, 350, "You poor thing. You can purchase clothes from me for 500 credits.").setColor('#000000')
-                this.dialogue4 = this.add.text(20, 375, "YES  <-  |  ->NO").setColor('#000000')
+                this.add.image(150, 400, 'playerNaked')
             }
-            // Remind player to always wear clothes if they do hold clothes
             else {
-                this.dialogue2 = this.add.text(20, 325, "Make sure you're dressed warm, the weather around here can be").setColor('#000000')
-                this.dialogue3 = this.add.text(20, 350, "freezing during the winter!").setColor('#000000')
+                this.add.image(150, 400, 'player')
             }
-            
-        }
-        // Quest introduction dialogue
-        else {
-            this.dialogue1 = this.add.text(20, 300, "Hello stranger! Rumor has it that there is a monster lurking in").setColor('#000000')
-            this.dialogue2 = this.add.text(20, 325, "amidst the shadows of our city, stealing players' cards...I'm").setColor('#000000')
-            this.dialogue3 = this.add.text(20, 350, "a bit skeptical it exists, but I'd steer clear if I were you...").setColor('#000000')
-            this.dialogue4 = this.add.text(20, 375, "Remain in BUNZEN? YES  <-  |  ->NO").setColor('#000000')
+
+            // Dialogue
+            if (!quests['BUNZEN']) {
+                this.dialogue1 = this.add.text(20, 300, "Welcome to BUNZEN, one of the largest cities in Greed Island!").setColor('#000000')
+                // Ask player if they want clothes if they don't hold clothes
+                if (!playerHasClothes) {
+                    this.dialogue2 = this.add.text(20, 325, "Oh no, you're practically naked! Where are your clothes??").setColor('#000000')
+                    this.dialogue3 = this.add.text(20, 350, "You poor thing. You can purchase clothes from me for 500 credits.").setColor('#000000')
+                    this.dialogue4 = this.add.text(20, 375, "YES  <-  |  ->NO").setColor('#000000')
+                }
+                // Remind player to always wear clothes if they do hold clothes
+                else {
+                    this.dialogue2 = this.add.text(20, 325, "Make sure you're dressed warm, the weather around here can be").setColor('#000000')
+                    this.dialogue3 = this.add.text(20, 350, "freezing during the winter!").setColor('#000000')
+                }
+                
+            }
+            // Quest introduction dialogue
+            else {
+                this.dialogue1 = this.add.text(20, 300, "Hello stranger! Rumor has it that there is a monster lurking in").setColor('#000000')
+                this.dialogue2 = this.add.text(20, 325, "amidst the shadows of our city, stealing players' cards...I'm").setColor('#000000')
+                this.dialogue3 = this.add.text(20, 350, "a bit skeptical it exists, but I'd steer clear if I were you...").setColor('#000000')
+                this.dialogue4 = this.add.text(20, 375, "Remain in BUNZEN? YES  <-  |  ->NO").setColor('#000000')
+            }
         }
     }
 

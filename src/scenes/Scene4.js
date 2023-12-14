@@ -17,40 +17,39 @@ class Scene4 extends Phaser.Scene {
     create() {
         if (gameCardsRemaining == 0) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
-            this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
-            this.scene.stop()
+            this.add.text(270, 240, 'GAME OVER')
         }
         else if (playerCards.length == 12) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
             this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
-            this.scene.stop()
-        }
-        
-        // deactivate & reset space key capture from menu
-        this.input.keyboard.removeCapture('SPACE')
-        keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-
-        // load background image
-        this.add.image(320, 240, 'background4')
-
-        // load player sprite
-        if (!playerHasClothes) {
-            this.add.image(150, 400, 'playerNaked')
         }
         else {
-            this.add.image(150, 400, 'player')
-        }
+            // deactivate & reset space key capture from menu
+            this.input.keyboard.removeCapture('SPACE')
+            keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
-        // Dialogue
-        if (!quests['AIAI']) {
-            this.dialogue1 = this.add.text(10, 300, "Welcome to AIAI, Greed Island's city of love!")
-            this.dialogue2 = this.add.text(10, 325, "In AIAI, you can earn money by showing love to those in need!")
-        }
-        else {
-            this.dialogue1 = this.add.text(10, 300, "Oh my! What a handsome young boy! My daughter has no friends")
-            this.dialogue2 = this.add.text(10, 325, "at school and feels very lonely, could you date her?")
-            this.dialogue3 = this.add.text(10, 350, "If it's money you need, I can pay! I'm actually the Mayor of AIAI.")
-            this.dialogue4 = this.add.text(10, 375, "YES  <-  |  ->NO")
+            // load background image
+            this.add.image(320, 240, 'background4')
+
+            // load player sprite
+            if (!playerHasClothes) {
+                this.add.image(150, 400, 'playerNaked')
+            }
+            else {
+                this.add.image(150, 400, 'player')
+            }
+
+            // Dialogue
+            if (!quests['AIAI']) {
+                this.dialogue1 = this.add.text(10, 300, "Welcome to AIAI, Greed Island's city of love!")
+                this.dialogue2 = this.add.text(10, 325, "In AIAI, you can earn money by showing love to those in need!")
+            }
+            else {
+                this.dialogue1 = this.add.text(10, 300, "Oh my! What a handsome young boy! My daughter has no friends")
+                this.dialogue2 = this.add.text(10, 325, "at school and feels very lonely, could you date her?")
+                this.dialogue3 = this.add.text(10, 350, "If it's money you need, I can pay! I'm actually the Mayor of AIAI.")
+                this.dialogue4 = this.add.text(10, 375, "YES  <-  |  ->NO")
+            }
         }
     }
 
