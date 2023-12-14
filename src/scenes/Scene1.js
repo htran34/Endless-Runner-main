@@ -21,8 +21,16 @@ class Scene1 extends Phaser.Scene {
     }
 
     create() {
-        // boolean to check if game has to be restarted from a player loss
-        this.gameEnded = false;
+        if (gameCardsRemaining == 0) {
+            this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
+            this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
+            this.scene.stop()
+        }
+        else if (playerCards.length == 12) {
+            this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
+            this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
+            this.scene.stop()
+        }
 
         // deactivate & reset space key capture from menu
         this.input.keyboard.removeCapture('SPACE')
@@ -95,6 +103,10 @@ class Scene1 extends Phaser.Scene {
                     }
                     gameCardsRemaining -= this.itemQuantity
                     inventories['player'][this.giftItem] += this.itemQuantity
+                    playerCards.indexOf(this.giftItem) === -1 ? playerCards.push(this.giftItem) : console.log("Player already holds card, not adding item to list.");
+                    if (playerCards.length == 12) {
+                        this.scene.start('GAME OVER')
+                    }
                     this.dialogue8 = this.add.text(10, 375, "You obtained " +this.itemQuantity+" copies of "+this.giftItem+"")
                     this.dialogue8 = this.add.text(10, 400, "and " +this.cashReward+ " credits.")
 

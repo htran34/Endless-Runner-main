@@ -15,9 +15,17 @@ class Scene4 extends Phaser.Scene {
     }
 
     create() {
-        // boolean to check if game has to be restarted from a player loss
-        this.gameEnded = false;
-
+        if (gameCardsRemaining == 0) {
+            this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
+            this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
+            this.scene.stop()
+        }
+        else if (playerCards.length == 12) {
+            this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
+            this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
+            this.scene.stop()
+        }
+        
         // deactivate & reset space key capture from menu
         this.input.keyboard.removeCapture('SPACE')
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)

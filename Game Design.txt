@@ -2,7 +2,7 @@ Greed Island Game Design
 
 - turn based card game
 - 15-20 different cards, 10 copies per card, all cards have transformation limit of 3
-- 10 other NPC players, all players begin with 5 accompany cards
+- 5 other NPC players, all players begin with 5 accompany cards
 - 10 cities total
 	- 1 special city: where card shop is located
 	- All other cities offer unique quests to obtain cards 
@@ -27,6 +27,8 @@ Greed Island Game Design
 	- Easy: 1
 	- Normal: 2
 	- Hard: 3
+- Player win condition:
+	- Collect all the cards in the game before there are no cards remaining
 - Cards
 	- Accompany: Travel to any city. 
 	- Defensive Wall: Protect yourself from an enemy attack spell.

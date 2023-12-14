@@ -49,7 +49,7 @@ class optionMenu extends Phaser.Scene {
         this.scenes = [NaN, 'background1', 'background2', 'background3', 'background4', 'background5']
         this.cities = [NaN, 'MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
         this.sprites = [NaN, 'player', 'playerBig', 'playerNaked', 'playerNakedBig']
-        this.add.image(320, 240, this.scenes[currentScene])
+        this.background = this.add.image(320, 240, this.scenes[currentScene])
         if ((currentScene == 1) || (currentScene == 3) || (currentScene == 4)){
             if (!playerHasClothes) {
                 this.add.image(150, 400, this.sprites[currentScene + 2])
@@ -214,7 +214,7 @@ class optionMenu extends Phaser.Scene {
             gameCards[card] -= 1
             gameCardsRemaining -= 1
             if (gameCardsRemaining == 0) {
-                this.scene.start('GAME OVER')
+                break
             }
             if (gameCards[card] == 0) {
                 delete gameCards[card]
@@ -227,13 +227,28 @@ class optionMenu extends Phaser.Scene {
         // console.log(gameCards)
     }
 
+    // gameEndCondition() {
+    //     if (gameCardsRemaining == 0) {
+    //         // this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
+    //         this.background.setVisible(false)
+    //         this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
+    //         this.scene.stop()
+    //     }
+    //     else if (playerCards.length == 12) {
+    //         //this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
+    //         this.background.setVisible(false)
+    //         this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
+    //         this.scene.stop()
+    //     }
+    // }
+
     wait(ms){
         var start = new Date().getTime();
         var end = start;
         while(end < start + ms) {
           end = new Date().getTime();
        }
-     }
+    }
   
     update() {
         // Activates button functionality
@@ -274,6 +289,10 @@ class optionMenu extends Phaser.Scene {
             else if (upJustPressed) {
                 if (inventories['player']['Accompany'] >= 1) {
                     inventories['player']['Accompany'] -= 1
+                    if (inventories['player']['Accompany'] == 0) {
+                        const index = playerCards.indexOf('Accompany')
+                        playerCards.splice(index, 1) 
+                    }
                     this.consumeTurn()
                     this.scene.start('ACCOMPANY')
                 }

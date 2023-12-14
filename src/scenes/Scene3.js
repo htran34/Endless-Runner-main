@@ -19,9 +19,17 @@ class Scene3 extends Phaser.Scene {
     }
 
     create() {
-        // boolean to check if game has to be restarted from a player loss
-        this.gameEnded = false;
-
+        if (gameCardsRemaining == 0) {
+            this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
+            this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
+            this.scene.stop()
+        }
+        else if (playerCards.length == 12) {
+            this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
+            this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
+            this.scene.stop()
+        }
+        
         // deactivate & reset space key capture from menu
         this.input.keyboard.removeCapture('SPACE')
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
@@ -108,6 +116,10 @@ class Scene3 extends Phaser.Scene {
                     delete gameCards[this.groundItem]
                 }
                 gameCardsRemaining -= this.itemQuantity
+                playerCards.indexOf(this.groundItem) === -1 ? playerCards.push(this.groundItem) : console.log("Player already holds card, not adding item to list.");
+                if (playerCards.length == 12) {
+                    this.scene.start('GAME OVER')
+                }
 
                 // Quest dialogue
                 this.dialogue5  = this.add.text(20, 150, "(A figure emerged from the shadows...it seems to be human?!)").setColor('#000000')
@@ -117,12 +129,15 @@ class Scene3 extends Phaser.Scene {
                 this.dialogue9  = this.add.text(20, 250, "(The person ran away, and you picked up some").setColor('#000000')
                 this.dialogue10 = this.add.text(20, 275, "scattered cards on the ground.").setColor('#000000')
                 this.dialogue11 = this.add.text(20, 300, "You acquired " +this.itemQuantity+ " copies of " +this.groundItem+ ".").setColor('#000000')
-
             }
             else if (rightJustPressed) {
                 // Use a copy of accompany to travel out of Bunzen if player has any accompany remaining
                 if (inventories['player']['Accompany'] >= 1) {
                     inventories['player']['Accompany'] -= 1
+                    if (inventories['player']['Accompany'] == 0) {
+                        const index = playerCards.indexOf('Accompany')
+                        playerCards.splice(index, 1) 
+                    }
                     this.scene.start('ACCOMPANY')
                 }
                 else {
