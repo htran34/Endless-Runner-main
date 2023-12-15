@@ -48,30 +48,29 @@ class optionMenu extends Phaser.Scene {
         // Grab & display current scene background image & player sprite
         this.scenes = [NaN, 'background1', 'background2', 'background3', 'background4', 'background5']
         this.cities = [NaN, 'MASSADORA', 'CARD SHOP', 'BUNZEN', 'AIAI', 'BADLANDS']
-        this.sprites = [NaN, 'player', 'playerBig', 'playerNaked', 'playerNakedBig']
         this.background = this.add.image(320, 240, this.scenes[currentScene])
-        if ((currentScene == 1) || (currentScene == 3) || (currentScene == 4)){
+        if ((currentScene == 2)) {
             if (!playerHasClothes) {
-                this.add.image(150, 400, this.sprites[currentScene + 2])
+                this.add.image(300, 350, 'playerNakedBig')
             }
             else {
-                this.add.image(150, 400, this.sprites[currentScene])
+                this.add.image(300, 350, 'playerBig')
             }
         }
-        else if (currentScene == 2) {
+        else if ((currentScene == 1) || (currentScene == 3) || (currentScene == 4)){
             if (!playerHasClothes) {
-                this.add.image(300, 350, this.sprites[currentScene + 2])
+                this.add.image(150, 400, 'playerNaked')
             }
             else {
-                this.add.image(300, 350, this.sprites[currentScene])
+                this.add.image(150, 400, 'player')
             }
         }
         else if (currentScene == 5) {
             if (!playerHasClothes) {
-                this.add.image(50, 150, this.sprites[currentScene + 2])
+                this.add.image(50, 150, 'playerNaked')
             }
             else {
-                this.add.image(50, 150, this.sprites[currentScene])
+                this.add.image(50, 150, 'player')
             }
         }
         
@@ -221,26 +220,7 @@ class optionMenu extends Phaser.Scene {
             }
         }
         console.log('cards remaining: ', gameCardsRemaining)
-        // console.log('\n')
-        // console.log(inventories)
-        // console.log('\n')
-        // console.log(gameCards)
     }
-
-    // gameEndCondition() {
-    //     if (gameCardsRemaining == 0) {
-    //         // this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
-    //         this.background.setVisible(false)
-    //         this.add.text(100, 300, "GAME OVER").setColor('#FFFFFF')
-    //         this.scene.stop()
-    //     }
-    //     else if (playerCards.length == 12) {
-    //         //this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
-    //         this.background.setVisible(false)
-    //         this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
-    //         this.scene.stop()
-    //     }
-    // }
 
     wait(ms){
         var start = new Date().getTime();

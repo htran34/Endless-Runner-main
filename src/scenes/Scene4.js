@@ -12,6 +12,7 @@ class Scene4 extends Phaser.Scene {
         this.load.image('player', './assets/player.png')
         this.load.image('playerNaked', './assets/playerNaked.png')
         this.load.image('background4', './assets/background4.png')
+        this.load.image('monopoly', './assets/monopoly.png')
     }
 
     create() {
@@ -45,6 +46,7 @@ class Scene4 extends Phaser.Scene {
                 this.dialogue2 = this.add.text(10, 325, "In AIAI, you can earn money by showing love to those in need!")
             }
             else {
+                this.add.image(320, 400, 'monopoly')
                 this.dialogue1 = this.add.text(10, 300, "Oh my! What a handsome young boy! My daughter has no friends")
                 this.dialogue2 = this.add.text(10, 325, "at school and feels very lonely, could you date her?")
                 this.dialogue3 = this.add.text(10, 350, "If it's money you need, I can pay! I'm actually the Mayor of AIAI.")

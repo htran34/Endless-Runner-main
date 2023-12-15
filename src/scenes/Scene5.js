@@ -6,6 +6,7 @@ class Scene5 extends Phaser.Scene {
     preload() {
         // load images/tile sprites
         this.load.image('player', './assets/player.png')
+        this.load.image('playerNaked', './assets/playerNaked.png')
         this.load.image('killua', './assets/killua.png')
         this.load.image('background5', './assets/background5.png')
     }
@@ -28,7 +29,12 @@ class Scene5 extends Phaser.Scene {
             this.add.image(320, 240, 'background5')
 
             // load player sprite
-            this.add.image(50, 150, 'player')
+            if (!playerHasClothes) {
+                this.add.image(50, 150, 'playerNaked')
+            }
+            else {
+                this.add.image(50, 150, 'player')
+            }
 
             // Dialogue
             if (!quests['BADLANDS']) {

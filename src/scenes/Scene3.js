@@ -12,7 +12,6 @@ class Scene3 extends Phaser.Scene {
         this.load.image('player', './assets/player.png')
         this.load.image('playerNaked', './assets/playerNaked.png')
         this.load.image('background3', './assets/background3.png')
-        this.load.image('gameover', './assets/gameover.png')
     }
 
     getRandomInt(max) {
