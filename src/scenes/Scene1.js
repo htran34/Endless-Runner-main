@@ -103,9 +103,6 @@ class Scene1 extends Phaser.Scene {
                     gameCardsRemaining -= this.itemQuantity
                     inventories['player'][this.giftItem] += this.itemQuantity
                     playerCards.indexOf(this.giftItem) === -1 ? playerCards.push(this.giftItem) : console.log("Player already holds card, not adding item to list.");
-                    if (playerCards.length == 12) {
-                        this.scene.start('GAME OVER')
-                    }
                     this.dialogue8 = this.add.text(10, 375, "You obtained " +this.itemQuantity+" copies of "+this.giftItem+"")
                     this.dialogue8 = this.add.text(10, 400, "and " +this.cashReward+ " credits.")
 

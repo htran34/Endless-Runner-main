@@ -117,9 +117,6 @@ class Scene3 extends Phaser.Scene {
                 }
                 gameCardsRemaining -= this.itemQuantity
                 playerCards.indexOf(this.groundItem) === -1 ? playerCards.push(this.groundItem) : console.log("Player already holds card, not adding item to list.");
-                if (playerCards.length == 12) {
-                    this.scene.start('GAME OVER')
-                }
 
                 // Quest dialogue
                 this.dialogue5  = this.add.text(20, 150, "(A figure emerged from the shadows...it seems to be human?!)").setColor('#000000')

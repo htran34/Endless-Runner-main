@@ -13,7 +13,7 @@ let config = {
           debug: false
       }
     },
-    scene: [mainMenu, optionMenu, accompanyScene, gameOver, Scene1, Scene2, Scene3, Scene4, Scene5]
+    scene: [mainMenu, optionMenu, accompanyScene, Scene1, Scene2, Scene3, Scene4, Scene5]
 };
 
 let game = new Phaser.Game(config)
@@ -42,7 +42,6 @@ let quests = {'MASSADORA': false, 'CARD SHOP': false, 'BUNZEN': false, 'AIAI': f
 // reserve keyboard vars
 let keySpace, keySpace2, keySpace3, keySpace4, keySpace5, score
 let currentScene = 0
-let difficultyLevels = [1, 2, 3]
 // text configuration
 let textConfig = {
   fontSize: '28px',

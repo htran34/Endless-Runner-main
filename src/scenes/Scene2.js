@@ -97,9 +97,6 @@ class Scene2 extends Phaser.Scene {
                 }
                 gameCardsRemaining -= numberToBuy
                 playerCards.indexOf(this.storeItem) === -1 ? playerCards.push(this.storeItem) : console.log("Player already holds card, not adding item to list.");
-                if (playerCards.length == 12) {
-                    this.scene.start('GAME OVER')
-                }
                 this.transactionText = this.add.text(100, 125, "You purchased "+numberToBuy+" copies of "+this.storeItem+".").setColor('#000000')
             }
         }
