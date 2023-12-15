@@ -28,7 +28,7 @@ Greed Island Game Design
 	- Normal: 2
 	- Hard: 3
 - Player win condition:
-	- Collect all the cards in the game before there are no cards remaining
+	- Collect 5 different cards the game before there are no cards remaining
 - Cards
 	- Accompany: Travel to any city. 
 	- Defensive Wall: Protect yourself from an enemy attack spell.

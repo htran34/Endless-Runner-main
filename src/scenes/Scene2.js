@@ -25,7 +25,7 @@ class Scene2 extends Phaser.Scene {
         }
         else if (playerCards.length == 12) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
-            this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
+            this.add.text(150, 240, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
         }
         else {  
             // deactivate & reset space key capture from menu
@@ -83,12 +83,12 @@ class Scene2 extends Phaser.Scene {
                 // However remaining copies left in stock after player purchases is returned to the game
                 let numberToBuy = playerCash / this.itemPrice
                 if (numberToBuy > this.itemQuantity) {
-                    inventories['player'][this.storeItem] = this.itemQuantity
+                    inventories['player'][this.storeItem] += this.itemQuantity
                     playerCash -= (this.itemQuantity * this.itemPrice)
                     numberToBuy = this.itemQuantity
                 }
                 else {
-                    inventories['player'][this.storeItem] = numberToBuy
+                    inventories['player'][this.storeItem] += numberToBuy
                     playerCash -= (numberToBuy * this.itemPrice)
                 }
                 gameCards[this.storeItem] += this.itemQuantity - numberToBuy

@@ -1,6 +1,14 @@
 // Hunter Tran
 // External sources used:
 // Menu Selection w/ Cursor in TypeScript: https://blog.ourcade.co/posts/2020/phaser-3-ui-menu-selection-cursor-selector/
+// The above source was used to implement menu selection opens with a cursor, the original source is in TypeScript and I 
+// modified the code to work for JavaScript.
+// 5 Major Phaser Components
+// 1. State Machines
+// 2. Text objects
+// 3. Hashmaps
+// 4. Sound objects
+// 5. Timer
 
 let config = {
     type: Phaser.AUTO,

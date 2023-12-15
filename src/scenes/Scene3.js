@@ -23,9 +23,9 @@ class Scene3 extends Phaser.Scene {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
             this.add.text(270, 240, 'GAME OVER')
         }
-        else if (playerCards.length == 12) {
+        else if (playerCards.length == 5) {
             this.add.rectangle(0, 0, 1000, 1000, '#000000', '#000000')
-            this.add.text(15, 150, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
+            this.add.text(150, 240, "CONGRATULATIONS ON COMPLETING GREED ISLAND!").setColor('#FFFFFF')
         }
         else {
             // deactivate & reset space key capture from menu
@@ -115,6 +115,7 @@ class Scene3 extends Phaser.Scene {
                     delete gameCards[this.groundItem]
                 }
                 gameCardsRemaining -= this.itemQuantity
+                inventories['player'][this.groundItem] += this.itemQuantity
                 playerCards.indexOf(this.groundItem) === -1 ? playerCards.push(this.groundItem) : console.log("Player already holds card, not adding item to list.");
 
                 // Quest dialogue
