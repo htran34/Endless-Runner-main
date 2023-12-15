@@ -41,7 +41,7 @@ class optionMenu extends Phaser.Scene {
     create() {
         this.insideAccompany = false
         this.buttonsActive = true
-        this.travelActive = false, this.questActive = false, this.checkActive = false, this.useCardActive = false
+        this.travelActive = false, this.questActive = false, this.checkActive = false
         this.buttons = []
         this.selectedButtonIndex = 0
 
@@ -106,22 +106,10 @@ class optionMenu extends Phaser.Scene {
             .setDisplaySize(150, 50)
     
         this.checkCardsButtonText = this.add.text(this.checkCardsButton.x, this.checkCardsButton.y, "Check Cards").setOrigin(0.5)
-
-        // Use Card button
-        this.useCardButton = this.add
-            .image(
-              this.checkCardsButton.x,
-              this.checkCardsButton.y + this.checkCardsButton.displayHeight + 10,
-              "glass-panel"
-            )
-            .setDisplaySize(150, 50)
-    
-        this.useCardButtonText = this.add.text(this.useCardButton.x, this.useCardButton.y, "Use Card").setOrigin(0.5)
     
         this.buttons.push(this.travelButton)
         this.buttons.push(this.questButton)
         this.buttons.push(this.checkCardsButton)
-        this.buttons.push(this.useCardButton)
         this.buttonSelector = this.add.image(0, 0, "cursor-hand")
         this.selectButton(0)
 
@@ -132,8 +120,6 @@ class optionMenu extends Phaser.Scene {
           this.questButtonText,
           this.checkCardsButton,
           this.checkCardsButtonText,
-          this.useCardButton, 
-          this.useCardButtonText,
           this.buttonSelector
         ]
     
@@ -164,12 +150,6 @@ class optionMenu extends Phaser.Scene {
         this.checkCardsButton.on("selected", () => {
             this.toggleButtons(objects)
             this.checkActive = true
-            this.boop = this.sound.play('boop')
-        })
-
-        this.useCardButton.on("selected", () => {
-            this.toggleButtons(objects)
-            this.useCardActive = true
             this.boop = this.sound.play('boop')
         })
     }
@@ -299,10 +279,25 @@ class optionMenu extends Phaser.Scene {
             }
         }
 
+        // Quest button functionality
         if (this.questActive) {
             this.consumeTurn()
             quests[this.cities[currentScene]] = true
             this.scene.start(this.cities[currentScene])
+        }
+
+        // Check cards button functionality
+        if (this.checkActive) {
+            // print out all the cards player currently has & the # of copies remaining for each
+            for (let i = 0; i < playerCards.length; i++) {
+                this.add.text(100, 20 + (i * 25), playerCards[i] + ": " +inventories['player'][playerCards[i]]+ " copies remaining").setColor('#000000')
+            }
+
+            // allow player to re-enter the options menu w/ spacebar
+            const spaceJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.space)
+            if (spaceJustPressed) {
+                this.scene.start('selectScene')
+            }
         }
     }
 }
